@@ -172,18 +172,6 @@ module.exports = {
         type: Sequelize.TEXT,
         allowNull: true,
       },
-      safety_index: {
-        type: Sequelize.TEXT,
-        allowNull: true,
-      },
-      health_care_index: {
-        type: Sequelize.TEXT,
-        allowNull: true,
-      },
-      cost_of_index: {
-        type: Sequelize.TEXT,
-        allowNull: true,
-      },
       property_price_to_income_ratio: {
         type: Sequelize.TEXT,
         allowNull: true,
