@@ -1,7 +1,7 @@
 "use strict";
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable("countries_tables", {
+    await queryInterface.createTable("countries_table", {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -24,7 +24,7 @@ module.exports = {
         type: Sequelize.DOUBLE,
         allowNull: true,
       },
-      infant_mortality_per_1000_births: {
+      infant_mortality_per_thousand_births: {
         type: Sequelize.DOUBLE,
         allowNull: true,
       },
@@ -36,7 +36,7 @@ module.exports = {
         type: Sequelize.DOUBLE,
         allowNull: true,
       },
-      phones_per_1000: {
+      phones_per_thousand: {
         type: Sequelize.DOUBLE,
         allowNull: true,
       },
@@ -92,7 +92,7 @@ module.exports = {
         type: Sequelize.TEXT,
         allowNull: true,
       },
-      cost_of_living_plus_pent_index: {
+      cost_of_living_plus_rent_index: {
         type: Sequelize.TEXT,
         allowNull: true,
       },
@@ -108,15 +108,15 @@ module.exports = {
         type: Sequelize.TEXT,
         allowNull: true,
       },
-      age_0_to_14_years: {
+      age_zero_to_fourteen_years: {
         type: Sequelize.TEXT,
         allowNull: true,
       },
-      age_15_to_64_years: {
+      age_fifteen_to_sixty_four_years: {
         type: Sequelize.TEXT,
         allowNull: true,
       },
-      age_Above_65_years: {
+      age_Above_sixty_five_years: {
         type: Sequelize.TEXT,
         allowNull: true,
       },
@@ -172,15 +172,15 @@ module.exports = {
         type: Sequelize.TEXT,
         allowNull: true,
       },
-      safety_index_0: {
+      safety_index: {
         type: Sequelize.TEXT,
         allowNull: true,
       },
-      health_care_index_0: {
+      health_care_index: {
         type: Sequelize.TEXT,
         allowNull: true,
       },
-      cost_of_index_0: {
+      cost_of_index: {
         type: Sequelize.TEXT,
         allowNull: true,
       },
@@ -213,6 +213,6 @@ module.exports = {
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable("countries_tables");
+    await queryInterface.dropTable("countries_table");
   },
 };
