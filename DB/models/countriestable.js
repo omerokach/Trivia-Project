@@ -13,9 +13,9 @@ module.exports = (sequelize, DataTypes) => {
   }
   CountriesTable.init(
     {
-      km: DataTypes.TEXT,
-      population: DataTypes.TEXT,
-      density_pop_km: DataTypes.TEXT,
+      km: DataTypes.INTEGER,
+      population: DataTypes.INTEGER,
+      density_pop_km: DataTypes.INTEGER,
       country: DataTypes.TEXT,
       region: DataTypes.TEXT,
       coastline: DataTypes.DOUBLE,
@@ -41,9 +41,9 @@ module.exports = (sequelize, DataTypes) => {
       groceriesIndex: DataTypes.TEXT,
       restaurantPriceIndex: DataTypes.TEXT,
       localPurchasingPowerIndex: DataTypes.TEXT,
-      ageZeroToFourteenYears: DataTypes.TEXT,
-      ageFifteenToSixtyFourYears: DataTypes.TEXT,
-      ageAboveSixtyFiveYears: DataTypes.TEXT,
+      ageZeroToFourteenYearsPercentage: DataTypes.TEXT,
+      ageFifteenToSixtyFourYearsPercentage: DataTypes.TEXT,
+      ageAboveSixtyFiveYearsPercentage: DataTypes.TEXT,
       crimeIndex: DataTypes.TEXT,
       safetyIndex: DataTypes.TEXT,
       healthCareIndex: DataTypes.TEXT,

@@ -13,15 +13,15 @@ module.exports = {
         allowNull: true,
       },
       km: {
-        type: Sequelize.TEXT,
+        type: Sequelize.INTEGER,
         allowNull: true,
       },
       population: {
-        type: Sequelize.TEXT,
+        type: Sequelize.INTEGER,
         allowNull: true,
       },
       density_pop_km: {
-        type: Sequelize.TEXT,
+        type: Sequelize.INTEGER,
         allowNull: true,
       },
       region: {
@@ -120,15 +120,15 @@ module.exports = {
         type: Sequelize.TEXT,
         allowNull: true,
       },
-      age_zero_to_fourteen_years: {
+      age_zero_to_fourteen_years_percentage: {
         type: Sequelize.TEXT,
         allowNull: true,
       },
-      age_fifteen_to_sixty_four_years: {
+      age_fifteen_to_sixty_four_years_percentage: {
         type: Sequelize.TEXT,
         allowNull: true,
       },
-      age_Above_sixty_five_years: {
+      age_Above_sixty_five_years_percentage: {
         type: Sequelize.TEXT,
         allowNull: true,
       },
