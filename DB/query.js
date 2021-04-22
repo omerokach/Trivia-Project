@@ -1,4 +1,4 @@
-const { CountriesTable, Question } = require("./models");
+const { CountriesTable } = require("./models");
 const { Sequelize, Op } = require("sequelize");
 
 const typeOneTemplateArr = [
@@ -129,7 +129,6 @@ function questionGeneratorTypeOneFunc() {
     let valuesArr = countries.map((country) => country.toJSON());
     let columnsVals = valuesArr.map((data) => data[column]);
     let countryVals = valuesArr.map((data) => data["country"]);
-    console.log(valuesArr);
 
     if (keyWord === "most" || keyWord === "largest") {
       const maxVal = Math.max(...columnsVals);
