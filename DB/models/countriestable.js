@@ -13,6 +13,9 @@ module.exports = (sequelize, DataTypes) => {
   }
   CountriesTable.init(
     {
+      km: DataTypes.TEXT,
+      population: DataTypes.TEXT,
+      density_pop_km: DataTypes.TEXT,
       country: DataTypes.TEXT,
       region: DataTypes.TEXT,
       coastline: DataTypes.DOUBLE,

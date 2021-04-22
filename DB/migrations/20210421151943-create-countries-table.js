@@ -12,6 +12,18 @@ module.exports = {
         type: Sequelize.TEXT,
         allowNull: true,
       },
+      km: {
+        type: Sequelize.TEXT,
+        allowNull: true,
+      },
+      population: {
+        type: Sequelize.TEXT,
+        allowNull: true,
+      },
+      density_pop_km: {
+        type: Sequelize.TEXT,
+        allowNull: true,
+      },
       region: {
         type: Sequelize.TEXT,
         allowNull: true,
