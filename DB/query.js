@@ -128,15 +128,31 @@ function questionGeneratorTypeOneFunc() {
     const typeOneQuestionObj = {};
     let valuesArr = countries.map((country) => country.toJSON());
     let columnsVals = valuesArr.map((data) => data[column]);
+    let countryVals = valuesArr.map((data) => data["country"]);
+    console.log(valuesArr);
 
     if (keyWord === "most" || keyWord === "largest") {
-      typeOneQuestionObj.answer = Math.max(...columnsVals);
-      columnsVals = columnsVals.filter(
+      const maxVal = Math.max(...columnsVals);
+      let maxValIndex;
+      if (typeof columnsVals[0] === "number") {
+        maxValIndex = columnsVals.indexOf(maxVal);
+      } else {
+        maxValIndex = columnsVals.indexOf(String(maxVal));
+      }
+      typeOneQuestionObj.answer = valuesArr[maxValIndex].country;
+      countryVals = countryVals.filter(
         (value) => value !== typeOneQuestionObj.answer
       );
     } else {
-      typeOneQuestionObj.answer = Math.min(...columnsVals);
-      columnsVals = columnsVals.filter(
+      const minVal = Math.min(...columnsVals);
+      let minValIndex;
+      if (typeof columnsVals[0] === "number") {
+        minValIndex = columnsVals.indexOf(minVal);
+      } else {
+        minValIndex = columnsVals.indexOf(String(minVal));
+      }
+      typeOneQuestionObj.answer = valuesArr[minValIndex].country;
+      countryVals = countryVals.filter(
         (value) => value !== typeOneQuestionObj.answer
       );
     }
@@ -145,9 +161,9 @@ function questionGeneratorTypeOneFunc() {
     typeOneQuestionObj.question =
       questionTemplate.optionForKeyWord[optionForKeyWordIndex][keyWord];
     typeOneQuestionObj.questionValues = JSON.stringify(valuesArr);
-    typeOneQuestionObj.optionA = columnsVals.pop();
-    typeOneQuestionObj.optionB = columnsVals.pop();
-    typeOneQuestionObj.optionC = columnsVals.pop();
+    typeOneQuestionObj.optionA = countryVals.pop();
+    typeOneQuestionObj.optionB = countryVals.pop();
+    typeOneQuestionObj.optionC = countryVals.pop();
     typeOneQuestionObj.parameterA = "country";
     typeOneQuestionObj.parameterB = column;
     typeOneQuestionObj.rating = 0;
@@ -273,9 +289,7 @@ async function questionGenerator() {
 }
 
 // (async function a() {
-//   for (i = 1; i <= 19; i++) {
-//     Question.create(await questionGenerator());
-//   }
+//   Question.create(await questionGenerator());
 // })();
 
 module.exports = { questionGenerator };
