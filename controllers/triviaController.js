@@ -1,4 +1,5 @@
 const { Question } = require("../DB/models");
+const { questionGenerator } = require("../DB/query");
 
 const questionObjFunction = (question) => {
   let options = [];
@@ -25,11 +26,14 @@ const questionObjFunction = (question) => {
   return questionObj;
 };
 
-
 module.exports.generateQuestion_get = async (req, res) => {
-
-}
-
+  try {
+    const question = await questionGenerator();
+    res.json(questionObjFunction(question));
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 module.exports.savedQuestion_get = async (req, res) => {
   try {

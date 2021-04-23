@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect, useContext } from "react";
 
-function AfterAnswer({setDisplayState, currentQuestion, isLastAnswerCorrect, timeToAnswer}) {
+function AfterAnswer({setDisplayState, currentQuestion, isLastAnswerCorrect, timeToAnswer, getDisplayState}) {
+    getDisplayState(2);
     return (
         <div>
             <h1>{isLastAnswerCorrect ? 'Correct! 🎊'  : 'Wrong! 😥'  }</h1>
