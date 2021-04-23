@@ -66,9 +66,10 @@ export default function TriviaBoard({ firstQuestion }) {
     setTimeToAnswer((prev) => [...prev, startingTime - remainingTime]);
     setDisplayState(2);
     if (answer === currentQuestion.answer) {
-      setPlayerScore(
-        (prev) =>
+      setPlayerScore((prev) =>
+        Math.floor(
           prev + ((1 - (startingTime - remainingTime) / startingTime) * 70 + 30)
+        )
       );
       setCorrectAnswer((prev) => prev + 1);
       setIsLastAnswerCorrect(true);
