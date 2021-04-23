@@ -21,13 +21,19 @@ export default function Main() {
     setStart(true);
   };
 
+  const highScoreButton = async () => {
+    const res = await axios.get("/high_score");
+    console.log(res.data);
+  };
+
   const history = useHistory();
 
   return (
     <div>
       <h1>hello {history.location.search.slice(10)}</h1>
       {start ? <TriviaBoard firstQuestion={firstQuestion} /> : ""}
-      <button onClick={startButton}>start</button>
+      <button onClick={highScoreButton}>High scores table</button>
+      <button onClick={startButton}>Start</button>
     </div>
   );
 }
