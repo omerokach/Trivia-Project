@@ -5,6 +5,7 @@ function AfterAnswer({
   currentQuestion,
   isLastAnswerCorrect,
   timeToAnswer,
+  playerScore,
 }) {
   console.log(currentQuestion);
 
@@ -17,6 +18,7 @@ function AfterAnswer({
         Took you {timeToAnswer[timeToAnswer.length - 1]} seconds to answer the
         question
       </h2>
+      <h4>Your score: {playerScore}</h4>
       {isLastAnswerCorrect ? (
         ""
       ) : (

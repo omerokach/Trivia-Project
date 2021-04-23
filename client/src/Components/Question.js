@@ -9,12 +9,14 @@ function Question({
   timer,
   wrongAnswers,
   setTimeToAnswer,
+  playerScore,
 }) {
   return (
     <div>
       <h3>Question {questionAsked}</h3>
       <h4>Correct Answer: {correctAnswers}</h4>
       <h4>{3 - wrongAnswers}Heart</h4>
+      <h4>Your score: {playerScore}</h4>
       <h4>{currentQuestion.question}</h4>
       <div>{timer}</div>
       <ul>

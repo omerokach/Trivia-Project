@@ -18,6 +18,7 @@ export default function TriviaBoard({ firstQuestion }) {
   const [timer, setTimer] = useState(updateTimer);
   const [questionAsked, setQuestionAsked] = useState(1);
   const [nextQeustion, setNextQuestion] = useState(false);
+  const [playerScore, setPlayerScore] = useState(0);
 
   const getSavedQuestion = async () => {
     try {
@@ -44,10 +45,12 @@ export default function TriviaBoard({ firstQuestion }) {
   useEffect(() => {
     let counter = timer;
     const interval = setInterval(() => {
+      console.log(counter);
       counter--;
       setTimer((prev) => (prev = counter));
-      if (counter === 0 || displayState !== 1) {
+      if (counter <= 0 || displayState !== 1) {
         clearInterval(interval);
+        return;
       }
     }, 1000);
   }, []);
@@ -57,6 +60,10 @@ export default function TriviaBoard({ firstQuestion }) {
     setTimeToAnswer((prev) => [...prev, startingTime - remainingTime]);
     setDisplayState(2);
     if (answer === currentQuestion.answer) {
+      setPlayerScore(
+        (prev) =>
+          prev + ((1 - (startingTime - remainingTime) / startingTime) * 70 + 30)
+      );
       setCorrectAnswer((prev) => prev + 1);
       setIsLastAnswerCorrect(true);
     } else {
@@ -78,6 +85,7 @@ export default function TriviaBoard({ firstQuestion }) {
           timer={timer}
           setTimeToAnswer={setTimeToAnswer}
           displayState={displayState}
+          playerScore={playerScore}
         />
       ) : displayState === 2 ? (
         <AfterAnswer
@@ -85,6 +93,7 @@ export default function TriviaBoard({ firstQuestion }) {
           currentQuestion={currentQuestion}
           isLastAnswerCorrect={isLastAnswerCorrect}
           timeToAnswer={timeToAnswer}
+          playerScore={playerScore}
         />
       ) : (
         ""
