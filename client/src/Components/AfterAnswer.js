@@ -12,16 +12,24 @@ function AfterAnswer({
   getSavedQuestion,
   updateTimer,
   setTimer,
+  wrongAnswers,
 }) {
   console.log(currentQuestion);
 
   const ratingFunc = (e) => {};
 
   const continueButton = async () => {
+    if (wrongAnswers === 3) {
+      console.log("loose");
+      return;
+    }
+
     if (questionAsked % 3 === 0) {
+      setDisplayState(1);
       getGeneratedQuestion();
       setTimer(updateTimer());
     } else {
+      setDisplayState(1);
       getSavedQuestion();
       setTimer(updateTimer());
     }
@@ -57,7 +65,9 @@ function AfterAnswer({
         <span id="4">4⭐ </span>
         <span id="5">5⭐ </span>
       </div>
-      <button onClick={() => continueButton()}> Continue ↪ </button>
+      <button onClick={() => continueButton()}>
+        {wrongAnswers === 3 ? "Back to homepage" : "Continue ↪"}
+      </button>
     </div>
   );
 }

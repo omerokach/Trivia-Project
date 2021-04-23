@@ -18,14 +18,12 @@ export default function TriviaBoard({ firstQuestion }) {
   const [questionAsked, setQuestionAsked] = useState(1);
   const [nextQeustion, setNextQuestion] = useState(false);
   const [playerScore, setPlayerScore] = useState(0);
-  const [didLose, setDidLose] = useState(false);
 
   const getSavedQuestion = async () => {
     try {
       const res = await axios.get("/trivia/saved_question");
       setQuestionAsked((prev) => prev + 1);
       setCurrentQuestion(res.data);
-      setDisplayState(1);
     } catch (error) {
       console.log(error.response);
     }
@@ -36,7 +34,6 @@ export default function TriviaBoard({ firstQuestion }) {
       const res = await axios.get("/trivia/generate_question");
       setQuestionAsked((prev) => prev + 1);
       setCurrentQuestion(res.data);
-      setDisplayState(1);
     } catch (error) {
       console.log(error.response);
     }
@@ -56,7 +53,11 @@ export default function TriviaBoard({ firstQuestion }) {
   // }, []);
 
   useEffect(() => {
-    const count = timer > 0 && setInterval(() => setTimer(timer - 1), 1000);
+    const count =
+      timer > 0 &&
+      displayState === 1 &&
+      setInterval(() => setTimer(timer - 1), 1000);
+    console.log(displayState);
     return () => clearInterval(count);
   }, [timer]);
 
@@ -104,6 +105,7 @@ export default function TriviaBoard({ firstQuestion }) {
           getSavedQuestion={getSavedQuestion}
           updateTimer={updateTimer}
           setTimer={setTimer}
+          wrongAnswers={wrongAnswers}
         />
       ) : (
         ""
