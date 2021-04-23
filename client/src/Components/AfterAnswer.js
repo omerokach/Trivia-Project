@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useContext } from "react";
+import React from "react";
+import axios from "axios";
 
 function AfterAnswer({
   setDisplayState,
@@ -6,10 +7,25 @@ function AfterAnswer({
   isLastAnswerCorrect,
   timeToAnswer,
   playerScore,
+  questionAsked,
+  getGeneratedQuestion,
+  getSavedQuestion,
+  updateTimer,
+  setTimer,
 }) {
   console.log(currentQuestion);
 
   const ratingFunc = (e) => {};
+
+  const continueButton = async () => {
+    if (questionAsked % 3 === 0) {
+      getGeneratedQuestion();
+      setTimer(updateTimer());
+    } else {
+      getSavedQuestion();
+      setTimer(updateTimer());
+    }
+  };
 
   return (
     <div>
@@ -41,7 +57,7 @@ function AfterAnswer({
         <span id="4">4⭐ </span>
         <span id="5">5⭐ </span>
       </div>
-      <butt4n onClick={() => setDisplayState(1)}> Continue ↪ </butt4n>
+      <button onClick={() => continueButton()}> Continue ↪ </button>
     </div>
   );
 }

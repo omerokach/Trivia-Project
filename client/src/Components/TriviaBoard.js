@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useHistory } from "react";
-import AnswerOption from "./AnswerOption";
 import AfterAnswer from "./AfterAnswer";
 import Question from "./Question";
 import axios from "axios";
@@ -19,6 +18,7 @@ export default function TriviaBoard({ firstQuestion }) {
   const [questionAsked, setQuestionAsked] = useState(1);
   const [nextQeustion, setNextQuestion] = useState(false);
   const [playerScore, setPlayerScore] = useState(0);
+  const [didLose, setDidLose] = useState(false);
 
   const getSavedQuestion = async () => {
     try {
@@ -42,18 +42,23 @@ export default function TriviaBoard({ firstQuestion }) {
     }
   };
 
+  // useEffect(() => {
+  //   let counter = timer;
+  //   const interval = setInterval(() => {
+  //     console.log(counter);
+  //     counter--;
+  //     setTimer((prev) => (prev = counter));
+  //     if (counter <= 0 || displayState !== 1) {
+  //       clearInterval(interval);
+  //       return;
+  //     }
+  //   }, 1000);
+  // }, []);
+
   useEffect(() => {
-    let counter = timer;
-    const interval = setInterval(() => {
-      console.log(counter);
-      counter--;
-      setTimer((prev) => (prev = counter));
-      if (counter <= 0 || displayState !== 1) {
-        clearInterval(interval);
-        return;
-      }
-    }, 1000);
-  }, []);
+    const count = timer > 0 && setInterval(() => setTimer(timer - 1), 1000);
+    return () => clearInterval(count);
+  }, [timer]);
 
   const checkAnswer = (answer, remainingTime) => {
     let startingTime = updateTimer();
@@ -94,6 +99,11 @@ export default function TriviaBoard({ firstQuestion }) {
           isLastAnswerCorrect={isLastAnswerCorrect}
           timeToAnswer={timeToAnswer}
           playerScore={playerScore}
+          questionAsked={questionAsked}
+          getGeneratedQuestion={getGeneratedQuestion}
+          getSavedQuestion={getSavedQuestion}
+          updateTimer={updateTimer}
+          setTimer={setTimer}
         />
       ) : (
         ""

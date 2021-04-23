@@ -5,10 +5,8 @@ function Question({
   questionAsked,
   checkAnswer,
   correctAnswers,
-  setTimer,
   timer,
   wrongAnswers,
-  setTimeToAnswer,
   playerScore,
 }) {
   return (

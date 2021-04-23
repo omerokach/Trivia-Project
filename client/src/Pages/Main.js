@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router";
 import axios from "axios";
 import TriviaBoard from "../Components/TriviaBoard";
@@ -16,7 +16,7 @@ export default function Main() {
     }
   };
 
-  const startbutton = async () => {
+  const startButton = async () => {
     await getSavedQuestion();
     setStart(true);
   };
@@ -27,7 +27,7 @@ export default function Main() {
     <div>
       <h1>hello {history.location.search.slice(10)}</h1>
       {start ? <TriviaBoard firstQuestion={firstQuestion} /> : ""}
-      <button onClick={startbutton}>start</button>
+      <button onClick={startButton}>start</button>
     </div>
   );
 }
