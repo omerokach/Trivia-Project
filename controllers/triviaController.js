@@ -13,12 +13,15 @@ const questionObjFunction = (question) => {
       question.optionC,
     ];
   }
+  console.log(question);
 
   const questionObj = {
     question: question.question,
     questionValues: JSON.parse(question.questionValues),
     answer: question.answer,
     options,
+    questionAbout: question.questionAbout,
+    parameter: question.parameterB,
     rating: question.rating,
     numOfVotes: question.numOfVotes,
   };

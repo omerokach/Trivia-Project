@@ -29,6 +29,9 @@ module.exports = {
       option_c: {
         type: Sequelize.STRING,
       },
+      question_about: {
+        type: Sequelize.STRING,
+      },
       parameter_a: {
         type: Sequelize.STRING,
       },

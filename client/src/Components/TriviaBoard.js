@@ -30,10 +30,6 @@ export default function TriviaBoard({ firstQuestion }) {
     }
   };
 
-  const getDisplayState = (displayState) => {
-    return displayState;
-  };
-
   const getGeneratedQuestion = async () => {
     try {
       const res = await axios.get("/trivia/generate_question");
@@ -89,7 +85,6 @@ export default function TriviaBoard({ firstQuestion }) {
           currentQuestion={currentQuestion}
           isLastAnswerCorrect={isLastAnswerCorrect}
           timeToAnswer={timeToAnswer}
-          getDisplayState={getDisplayState}
         />
       ) : (
         ""

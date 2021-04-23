@@ -1,4 +1,4 @@
-const { CountriesTable } = require("./models");
+const { CountriesTable, Question } = require("./models");
 const { Sequelize, Op } = require("sequelize");
 
 const typeOneTemplateArr = [
@@ -9,26 +9,31 @@ const typeOneTemplateArr = [
         column: "density_pop_km",
         most: "Which country is most densely populated?",
         least: "Which country is least densely populated?",
+        questionAbout: "Density of population per km",
       },
       {
         column: "birthrate",
         most: "Which country has the most birthrate?",
         least: "Which country has the  least birthrate?",
+        questionAbout: "Birthrate",
       },
       {
         column: "deathrate",
         most: "Which country has the most deathrate?",
         least: "Which country has the least deathrate?",
+        questionAbout: "deathrate",
       },
       {
         column: "phones_per_thousand",
         most: "Which country hat the most cell phones per person?",
         least: "Which country hat the least cell phones per person?",
+        questionAbout: "Nunber of phones per thousand people",
       },
       {
         column: "cost_of_living_index",
         most: "Which country is the most expensive?",
         least: "Which country is the least expensive?",
+        questionAbout: "Cost of living index",
       },
     ],
   },
@@ -39,11 +44,13 @@ const typeOneTemplateArr = [
         column: "km",
         largest: "Which country is the largest by total area?",
         smallest: "Which country is the smallest by total area?",
+        questionAbout: "Area in km",
       },
       {
         column: "coastline",
         largest: "Which country is the largest by coastline per land?",
         smallest: "Which country is the smallest by coastline per land?",
+        questionAbout: "Coast line in km",
       },
     ],
   },
@@ -53,26 +60,32 @@ const typeTwoTemplateArr = [
   {
     column: "capital",
     template: "What is the capital of country?",
+    questionAbout: "Capitals",
   },
   {
     column: "population",
     template: "How many people live in country?",
+    questionAbout: "Population",
   },
   {
     column: "continent",
     template: "In what continent is country?",
+    questionAbout: "Continent",
   },
   {
     column: "age_zero_to_fourteen_years_percentage",
     template: "What is the percentage of the ages 0-14 in country?",
+    questionAbout: "Percentage of population: age 0-14",
   },
   {
     column: "age_fifteen_to_sixty_four_years_percentage",
     template: "What is the percentage of the ages 15-64 in country?",
+    questionAbout: "Percentage of population: age 15-64",
   },
   {
     column: "age_Above_sixty_five_years_percentage",
     template: "What is the percentage of the ages 65 and above in country?",
+    questionAbout: "Percentage of population: age 65 and above",
   },
 ];
 
@@ -80,27 +93,32 @@ const typeThreeTemplateArr = [
   {
     template: "Are there more people in X than in Y?",
     column: "population",
+    questionAbout: "population",
   },
   {
     template: "Is X larger than Y?",
     column: "km",
+    questionAbout: "Area in km",
   },
   {
     template: "Does X have a higher population density than Y?",
-    column: "density_pop_km",
+    column: "Density of population per km",
   },
   {
     template:
       "Is the quality of life in X higher than the quality of life in Y?",
     column: "quality_of_life_index",
+    questionAbout: "Quality of living index",
   },
   {
     template: "Is the crime rate of X higher than the crime rate in Y?",
     column: "crime_index",
+    questionAbout: "Crime rate index",
   },
   {
     template: "Are restaurants in X more expensive than restaurants in Y?",
     column: "restaurant_price_index",
+    questionAbout: "Restaurant price index",
   },
 ];
 
@@ -163,6 +181,8 @@ function questionGeneratorTypeOneFunc() {
     typeOneQuestionObj.optionA = countryVals.pop();
     typeOneQuestionObj.optionB = countryVals.pop();
     typeOneQuestionObj.optionC = countryVals.pop();
+    typeOneQuestionObj.questionAbout =
+      questionTemplate.optionForKeyWord[optionForKeyWordIndex].questionAbout;
     typeOneQuestionObj.parameterA = "country";
     typeOneQuestionObj.parameterB = column;
     typeOneQuestionObj.rating = 0;
@@ -201,6 +221,7 @@ function questionGeneratorTypeTwoFunc() {
     typeTwoQuestionObj.optionA = valuesArr.pop()[column];
     typeTwoQuestionObj.optionB = valuesArr.pop()[column];
     typeTwoQuestionObj.optionC = valuesArr.pop()[column];
+    typeTwoQuestionObj.questionAbout = questionTemplate.questionAbout;
     typeTwoQuestionObj.parameterA = "country";
     typeTwoQuestionObj.parameterB = column;
     typeTwoQuestionObj.rating = 0;
@@ -258,6 +279,7 @@ function questionGeneratorTypeThreeFunc() {
     typeThreeQuestionObj.optionA = null;
     typeThreeQuestionObj.optionB = null;
     typeThreeQuestionObj.optionC = null;
+    typeThreeQuestionObj.questionAbout = questionObj.questionAbout;
     typeThreeQuestionObj.parameterA = "country";
     typeThreeQuestionObj.parameterB = column;
     typeThreeQuestionObj.rating = 0;

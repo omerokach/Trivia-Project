@@ -5,16 +5,29 @@ function AfterAnswer({
   currentQuestion,
   isLastAnswerCorrect,
   timeToAnswer,
-  getDisplayState,
 }) {
-  getDisplayState(2);
+  console.log(currentQuestion);
+
   return (
     <div>
       <h1>{isLastAnswerCorrect ? "Correct! 🎊" : "Wrong! 😥"}</h1>
-      <h1>
+      <h2>
         Took you {timeToAnswer[timeToAnswer.length - 1]} seconds to answer the
         question
-      </h1>
+      </h2>
+      {isLastAnswerCorrect ? (
+        ""
+      ) : (
+        <p>The right answer is: {currentQuestion.answer}</p>
+      )}
+      <p>Question about: {currentQuestion.questionAbout}</p>
+      <ul>
+        {currentQuestion.questionValues.map((obj) => (
+          <li>
+            {obj.country} <strong>{obj[currentQuestion.parameter]}</strong>
+          </li>
+        ))}
+      </ul>
       <button onClick={() => setDisplayState(1)}> Continue ↪ </button>
     </div>
   );
