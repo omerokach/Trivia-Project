@@ -25,6 +25,12 @@ const questionObjFunction = (question) => {
   return questionObj;
 };
 
+
+module.exports.generateQuestion_get = async (req, res) => {
+
+}
+
+
 module.exports.savedQuestion_get = async (req, res) => {
   try {
     let savedQuestions = await Question.findAll({});
