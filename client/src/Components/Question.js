@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import AnswerOption from "./AnswerOption";
-// import Timer from "./Timer";
 
 export default function Question({ currentQuestion, questionAsked, checkAnswer,correctAnswers, setTimer, timer }) {
   const [timeToAnswer, setTimeToAnswer] = useState([]);
@@ -21,7 +20,6 @@ export default function Question({ currentQuestion, questionAsked, checkAnswer,c
       <h4>Correct Answer{correctAnswers}</h4>
       <h4>{currentQuestion.question}</h4>
       <div>{timer}</div>
-      {/* <Timer setTimeToAnswer={setTimeToAnswer} /> */}
       <ul>
         {currentQuestion.options.map((option) => (
           <AnswerOption option={option} checkAnswer={checkAnswer} timer={timer} />
