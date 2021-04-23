@@ -14,6 +14,8 @@ const questionObjFunction = (question) => {
     ];
   }
 
+  options.sort(() => Math.random() - 0.5);
+
   const questionObj = {
     id: question.id,
     type: question.type,
