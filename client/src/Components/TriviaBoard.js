@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useHistory } from "react";
 import AnswerOption from "./AnswerOption";
 import AfterAnswer from "./AfterAnswer";
-import Question from './Question'
-import axios from 'axios'
+import Question from "./Question";
+import axios from "axios";
 
-export default function TriviaBoard({firstQuestion}) {
+export default function TriviaBoard({ firstQuestion }) {
   const [currentQuestion, setCurrentQuestion] = useState(firstQuestion);
   const [correctAnswers, setCorrectAnswer] = useState(0);
   const [wrongAnswers, setWrongAnswer] = useState(0);
@@ -31,8 +31,8 @@ export default function TriviaBoard({firstQuestion}) {
   };
 
   const getDisplayState = (displayState) => {
-    return displayState
-  }
+    return displayState;
+  };
 
   const getGeneratedQuestion = async () => {
     try {
@@ -45,7 +45,20 @@ export default function TriviaBoard({firstQuestion}) {
     }
   };
 
-  const checkAnswer = (answer) => {
+  useEffect(() => {
+    let counter = timer;
+    const interval = setInterval(() => {
+      counter--;
+      setTimer((prev) => (prev = counter));
+      if (counter === 0 || displayState !== 1) {
+        clearInterval(interval);
+      }
+    }, 1000);
+  }, []);
+
+  const checkAnswer = (answer, remainingTime) => {
+    let startingTime = updateTimer();
+    setTimeToAnswer((prev) => [...prev, startingTime - remainingTime]);
     setDisplayState(2);
     if (answer === currentQuestion.answer) {
       setCorrectAnswer((prev) => prev + 1);
@@ -56,39 +69,26 @@ export default function TriviaBoard({firstQuestion}) {
     }
   };
 
-  let counter = timer;
-  let startingTime = timer;
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      counter--;
-      setTimer((prev) => (prev = counter));
-      if (counter === 0 || displayState !== 1) {
-        setTimeToAnswer((prev) => [...prev, startingTime-counter])
-        clearInterval(interval);
-      }
-    }, 1000);
-  }, []);
-
   return (
     <div>
-       {displayState === 1 ? (
-            <Question 
-            currentQuestion={currentQuestion}
-            questionAsked={questionAsked}
-            checkAnswer={checkAnswer}
-            correctAnswers={correctAnswers}
-            wrongAnswers={wrongAnswers}
-            setTimer={setTimer}
-            timer={timer}
-            setTimeToAnswer={setTimeToAnswer}
-            displayState={displayState}/>
+      {displayState === 1 ? (
+        <Question
+          currentQuestion={currentQuestion}
+          questionAsked={questionAsked}
+          checkAnswer={checkAnswer}
+          correctAnswers={correctAnswers}
+          wrongAnswers={wrongAnswers}
+          setTimer={setTimer}
+          timer={timer}
+          setTimeToAnswer={setTimeToAnswer}
+          displayState={displayState}
+        />
       ) : displayState === 2 ? (
         <AfterAnswer
           setDisplayState={setDisplayState}
           currentQuestion={currentQuestion}
           isLastAnswerCorrect={isLastAnswerCorrect}
-          timeToAnswer = {timeToAnswer}
+          timeToAnswer={timeToAnswer}
           getDisplayState={getDisplayState}
         />
       ) : (

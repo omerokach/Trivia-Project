@@ -5,12 +5,11 @@ import TriviaBoard from "../Components/TriviaBoard";
 
 export default function Main() {
   const [start, setStart] = useState(false);
-  const [firstQuestion, setFirstQuestion] = useState({})
+  const [firstQuestion, setFirstQuestion] = useState({});
 
   const getSavedQuestion = async () => {
     try {
       const res = await axios.get("/trivia/saved_question");
-      console.log("res",res.data);
       setFirstQuestion(res.data);
     } catch (error) {
       console.log(error);
@@ -20,18 +19,14 @@ export default function Main() {
   const startbutton = async () => {
     await getSavedQuestion();
     setStart(true);
-  }
+  };
 
   const history = useHistory();
 
   return (
     <div>
-      {console.log("firstQuestion",firstQuestion)}
       <h1>hello {history.location.search.slice(10)}</h1>
-      {start ? (
-        <TriviaBoard firstQuestion={firstQuestion}/>
-      ) : ''
-    }
+      {start ? <TriviaBoard firstQuestion={firstQuestion} /> : ""}
       <button onClick={startbutton}>start</button>
     </div>
   );
