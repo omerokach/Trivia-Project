@@ -38,12 +38,12 @@ export default function Main() {
 
   return (
     <div className="main-div">
-      <h1>Welcome {history.location.search.slice(10)}</h1>
-      <h2>Hope you'll enjoy 😃</h2>
       {start ? (
         <TriviaBoard firstQuestion={firstQuestion} />
       ) : (
         <div className="start-page">
+          <h1>Welcome {history.location.search.slice(10)}</h1>
+          <h2>Hope you'll enjoy 😃</h2>
           <div className="instruction">
             <h3>Instruction</h3>
             <ul>

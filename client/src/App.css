@@ -170,6 +170,10 @@ td {
 
 /* after answer style */
 
+.after-answer-div h1 {
+  font-size: 2rem;
+}
+
 .after-answer-div .after-answer-information {
   margin: 1rem;
   display: flex;

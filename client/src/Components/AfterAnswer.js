@@ -45,13 +45,21 @@ function AfterAnswer({
 
   return (
     <div className="after-answer-div">
-      <h3>
+      {wrongAnswers === 3 ? (
+        <h1>
+          Game over, you have answer {questionAsked - wrongAnswers} question
+          correctly
+        </h1>
+      ) : (
+        ""
+      )}
+      <h2>
         {isTimeOver
           ? "Sorry, you run out of time.."
           : isLastAnswerCorrect
           ? "Correct! 🎊"
           : "Wrong! 😥"}
-      </h3>
+      </h2>
       {isTimeOver === false ? (
         <h3>
           Took you {timeToAnswer[timeToAnswer.length - 1]} seconds to answer the
