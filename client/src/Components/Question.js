@@ -12,23 +12,27 @@ function Question({
   playerScore,
 }) {
   return (
-    <div>
-      <h3>Question {questionAsked}</h3>
-      <h4>Correct Answer: {correctAnswers}</h4>
-      <h4>{3 - wrongAnswers}Heart</h4>
-      <h4>Your score: {playerScore}</h4>
-      <h4>{currentQuestion.question}</h4>
-      <div>{timer}</div>
-      <ul>
-        {currentQuestion.options.map((option, i) => (
-          <AnswerOption
-            key={i}
-            option={option}
-            checkAnswer={checkAnswer}
-            timer={timer}
-          />
-        ))}
-      </ul>
+    <div className="board-div">
+      <div className="board-information">
+        <h4>Question {questionAsked}</h4>
+        <h4>Correct Answer: {correctAnswers}</h4>
+        <h4>{3 - wrongAnswers} 💝 </h4>
+        <h4>Your score: {playerScore}</h4>
+      </div>
+      <div className="timer">{timer}</div>
+      <div className="question-div">
+        <h4>{currentQuestion.question}</h4>
+        <ul>
+          {currentQuestion.options.map((option, i) => (
+            <AnswerOption
+              key={i}
+              option={option}
+              checkAnswer={checkAnswer}
+              timer={timer}
+            />
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }
