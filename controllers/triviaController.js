@@ -39,9 +39,9 @@ const questionObjFunction = (question) => {
 module.exports.generateQuestion_get = async (req, res) => {
   try {
     const question = await questionGenerator();
-    res.json(questionObjFunction(question));
+    res.status(200).json(questionObjFunction(question));
   } catch (error) {
-    console.log(error);
+    res.status(500).json({message: error.message});
   }
 };
 
@@ -75,8 +75,8 @@ module.exports.savedQuestion_get = async (req, res) => {
       where: { id: idArr[randomIndex] },
     });
     const questionObj = questionObjFunction(question.dataValues);
-    res.json(questionObj);
+    res.status(200).json(questionObj);
   } catch (error) {
-    console.log(error);
+    res.status(500).json({message: error.message});
   }
 };
