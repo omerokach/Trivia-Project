@@ -1,15 +1,13 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router";
 import axios from "axios";
 import "../App.css";
 import TriviaBoard from "../Components/TriviaBoard";
 
-export default function Main() {
+export default function Main({ userName }) {
   const [start, setStart] = useState(false);
   const [firstQuestion, setFirstQuestion] = useState({});
   const [clickedHighScore, setClickedHighScore] = useState(false);
   const [highScore, setHighScore] = useState([]);
-  const history = useHistory();
 
   const getSavedQuestion = async () => {
     try {
@@ -39,10 +37,14 @@ export default function Main() {
   return (
     <div className="main-div">
       {start ? (
-        <TriviaBoard firstQuestion={firstQuestion} setStart={setStart} />
+        <TriviaBoard
+          firstQuestion={firstQuestion}
+          setStart={setStart}
+          userName={userName}
+        />
       ) : (
         <div className="start-page">
-          <h1>Welcome {history.location.search.slice(10)}</h1>
+          <h1>Welcome {userName}</h1>
           <h2>Hope you'll enjoy 😃</h2>
           <div className="instruction">
             <h3>Instruction</h3>

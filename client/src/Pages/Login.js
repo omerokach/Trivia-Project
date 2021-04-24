@@ -1,13 +1,17 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router";
 import "../App.css";
 
-export default function Login() {
-  const [userName, setUserName] = useState("");
+export default function Login({ userName, setUserName }) {
   const [isError, setIsError] = useState(false);
+  const history = useHistory();
+
   const loginButton = (e) => {
+    e.preventDefault();
     if (userName === "") {
-      e.preventDefault();
       setIsError(true);
+    } else {
+      history.push("/main");
     }
   };
 
@@ -16,7 +20,7 @@ export default function Login() {
       <h1>Welcome to the most popular trivia game online</h1>
       <div className="login-div">
         <h2>Login</h2>
-        <form action="/main">
+        <form>
           <label htmlFor="username">Username: </label>
           <input
             onChange={(e) => setUserName(e.target.value)}

@@ -4,7 +4,7 @@ import Question from "./Question";
 import axios from "axios";
 import "../App.css";
 
-export default function TriviaBoard({ firstQuestion, setStart }) {
+export default function TriviaBoard({ firstQuestion, setStart, userName }) {
   const [currentQuestion, setCurrentQuestion] = useState(firstQuestion);
   const [correctAnswers, setCorrectAnswer] = useState(0);
   const [wrongAnswers, setWrongAnswer] = useState(0);
@@ -12,6 +12,7 @@ export default function TriviaBoard({ firstQuestion, setStart }) {
   const [isLastAnswerCorrect, setIsLastAnswerCorrect] = useState(false);
   const [displayState, setDisplayState] = useState(1);
   const [isTimeOver, setIsTimeOver] = useState(false);
+  const [playerRank, setPlayerRank] = useState(null);
   let timerCount = 20;
   const updateTimer = () => {
     return timerCount > 5 ? 20 - 0.5 * correctAnswers : 5;
@@ -54,7 +55,7 @@ export default function TriviaBoard({ firstQuestion, setStart }) {
     return () => clearInterval(count);
   }, [timer]);
 
-  const checkAnswer = (answer, remainingTime) => {
+  const checkAnswer = async (answer, remainingTime) => {
     let startingTime = updateTimer();
     setTimeToAnswer((prev) => [...prev, startingTime - remainingTime]);
     setDisplayState(2);
@@ -69,6 +70,17 @@ export default function TriviaBoard({ firstQuestion, setStart }) {
     } else {
       setIsLastAnswerCorrect(false);
       setWrongAnswer((prev) => prev + 1);
+      if (wrongAnswers === 2) {
+        try {
+          const res = await axios.post("/high_score", {
+            userName: userName,
+            score: playerScore,
+          });
+          setPlayerRank(res.data.userIndex);
+        } catch (error) {
+          console.log(error);
+        }
+      }
     }
   };
 
@@ -108,6 +120,7 @@ export default function TriviaBoard({ firstQuestion, setStart }) {
           isTimeOver={isTimeOver}
           setIsTimeOver={setIsTimeOver}
           setStart={setStart}
+          playerRank={playerRank}
         />
       ) : (
         ""

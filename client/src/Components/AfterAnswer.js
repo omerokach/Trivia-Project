@@ -17,6 +17,7 @@ function AfterAnswer({
   isTimeOver,
   setIsTimeOver,
   setStart,
+  playerRank,
 }) {
   console.log(currentQuestion);
   const [isRated, setIsRated] = useState(false);
@@ -72,6 +73,7 @@ function AfterAnswer({
       )}
       <div className="after-answer-information">
         <h4>Your score: {playerScore}</h4>
+        <h4>Your rank: {playerRank}</h4>
         {isLastAnswerCorrect ? (
           ""
         ) : (
