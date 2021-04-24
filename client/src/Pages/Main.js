@@ -39,7 +39,7 @@ export default function Main() {
   return (
     <div className="main-div">
       {start ? (
-        <TriviaBoard firstQuestion={firstQuestion} />
+        <TriviaBoard firstQuestion={firstQuestion} setStart={setStart} />
       ) : (
         <div className="start-page">
           <h1>Welcome {history.location.search.slice(10)}</h1>

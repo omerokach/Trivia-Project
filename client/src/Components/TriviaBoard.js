@@ -4,7 +4,7 @@ import Question from "./Question";
 import axios from "axios";
 import "../App.css";
 
-export default function TriviaBoard({ firstQuestion }) {
+export default function TriviaBoard({ firstQuestion, setStart }) {
   const [currentQuestion, setCurrentQuestion] = useState(firstQuestion);
   const [correctAnswers, setCorrectAnswer] = useState(0);
   const [wrongAnswers, setWrongAnswer] = useState(0);
@@ -107,6 +107,7 @@ export default function TriviaBoard({ firstQuestion }) {
           userRatingSave={userRatingSave}
           isTimeOver={isTimeOver}
           setIsTimeOver={setIsTimeOver}
+          setStart={setStart}
         />
       ) : (
         ""

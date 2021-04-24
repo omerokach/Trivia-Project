@@ -16,11 +16,13 @@ function AfterAnswer({
   userRatingSave,
   isTimeOver,
   setIsTimeOver,
+  setStart,
 }) {
   console.log(currentQuestion);
   const [isRated, setIsRated] = useState(false);
   const continueButton = async () => {
     if (wrongAnswers === 3) {
+      setStart(false);
       console.log("loose");
       return;
     }
