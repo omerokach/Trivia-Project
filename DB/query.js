@@ -102,7 +102,8 @@ const typeThreeTemplateArr = [
   },
   {
     template: "Does X have a higher population density than Y?",
-    column: "Density of population per km",
+    column: "density_pop_km",
+    questionAbout: "Density of population per km",
   },
   {
     template:
@@ -309,8 +310,8 @@ async function questionGenerator() {
   }
 }
 
-// (async function a() {
-//   Question.create(await questionGenerator());
-// })();
+(async function a() {
+  Question.create(await questionGenerator());
+})();
 
 module.exports = { questionGenerator };
