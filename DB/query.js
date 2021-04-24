@@ -25,8 +25,8 @@ const typeOneTemplateArr = [
       },
       {
         column: "phones_per_thousand",
-        most: "Which country hat the most cell phones per person?",
-        least: "Which country hat the least cell phones per person?",
+        most: "Which country has the most cell phones per person?",
+        least: "Which country has the least cell phones per person?",
         questionAbout: "Nunber of phones per thousand people",
       },
       {

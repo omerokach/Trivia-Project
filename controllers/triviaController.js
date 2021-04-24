@@ -68,6 +68,7 @@ module.exports.generateQuestion_get = async (req, res) => {
 module.exports.saveNewQuestion_post = async (req, res) => {
   try {
     const newQuestion = req.body;
+    console.log(newQuestion);
     newQuestion.questionValues = JSON.stringify(newQuestion.questionValues);
     const ifExist = await Question.findOne({
       where: {
@@ -80,9 +81,13 @@ module.exports.saveNewQuestion_post = async (req, res) => {
     if (!ifExist) {
       const dbRes = await Question.create(newQuestion);
       calculateQuestionRating(dbRes.dataValues.id);
+      return res.status(200).json({ message: "success" });
+    } else {
+      calculateQuestionRating(dbRes.dataValues.id);
+      return res.status(200).json({ message: "success" });
     }
   } catch (error) {
-    console.log(error);
+    res.status(500).json({ message: error.message });
   }
 };
 
