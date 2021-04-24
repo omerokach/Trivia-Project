@@ -11,7 +11,7 @@ module.exports.highScores_get = async (req, res) => {
     });
     res.status(200).json(highScoreTable);
   } catch (error) {
-    res.status(500).json({message: error.message});
+    res.status(500).json({ message: error.message });
   }
 };
 
@@ -24,13 +24,12 @@ module.exports.highScores_post = async (req, res) => {
     arr.sort((a, b) => b.score - a.score);
     let userIndex = 0;
     arr.forEach((obj, i) => {
-      console.log(obj, i);
       if (userScore.score === obj.score) {
         userIndex = i + 1;
       }
     });
     res.status(200).json({ userIndex });
   } catch (error) {
-    res.status(500).json({message: error.message});
+    res.status(500).json({ message: error.message });
   }
 };

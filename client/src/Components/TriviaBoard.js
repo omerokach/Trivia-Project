@@ -85,6 +85,7 @@ export default function TriviaBoard({ firstQuestion, setStart, userName }) {
   };
 
   const userRatingSave = (rating, question) => {
+    
     ratingArr.push({ rating, question });
   };
 

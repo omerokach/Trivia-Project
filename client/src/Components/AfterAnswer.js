@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "../App.css";
+import axios from "axios";
 
 function AfterAnswer({
   setDisplayState,
@@ -30,7 +31,7 @@ function AfterAnswer({
 
     setIsTimeOver(false);
 
-    if (questionAsked % 3 === 0) {
+    if (questionAsked % 2 === 0) {
       setDisplayState(1);
       getGeneratedQuestion();
       setTimer(updateTimer());
@@ -43,6 +44,10 @@ function AfterAnswer({
 
   const ratingOnce = (questionRating, question) => {
     setIsRated(true);
+    currentQuestion.numOfVotes += 1;
+    if (!currentQuestion.id) {
+      const dbRes = axios.post("/trivia/save_new_question", currentQuestion);
+    }
     userRatingSave(questionRating, question);
   };
 

@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      this.belongsTo(models.Question, { foreignKey: questionId });
+      // this.belongsTo(models.Question, { foreignKey: questionId });
     }
   }
   ScoreRankCalculator.init(
@@ -21,7 +21,7 @@ module.exports = (sequelize, DataTypes) => {
     {
       sequelize,
       modelName: "ScoreRankCalculator",
-      tableName: "score_rank_calculator",
+      tableName: "score_rank_calculators",
       underscored: true,
     }
   );
