@@ -37,33 +37,57 @@ export default function Main() {
   };
 
   return (
-    <div>
-      <h1>hello {history.location.search.slice(10)}</h1>
-      {start ? <TriviaBoard firstQuestion={firstQuestion} /> : ""}
-      <button onClick={highScoreButton}>High scores table</button>
-      <button onClick={startButton}>Start</button>
-      <div className="high-score-div">
-        {clickedHighScore && (
-          <table>
-            <thead>
-              <tr>
-                <th>Rank</th>
-                <th>User</th>
-                <th>Score</th>
-              </tr>
-            </thead>
-            <tbody>
-              {highScore.map((obj, i) => (
-                <tr key={i}>
-                  <td>{i + 1}</td>
-                  <td>{obj.name}</td>
-                  <td>{obj.score}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        )}
-      </div>
+    <div className="main-div">
+      <h1>Welcome {history.location.search.slice(10)}</h1>
+      <h2>Hope you'll enjoy 😃</h2>
+      {start ? (
+        <TriviaBoard firstQuestion={firstQuestion} />
+      ) : (
+        <div className="start-page">
+          <div className="instruction">
+            <h3>Instruction</h3>
+            <ul>
+              <li>
+                Once you clicked the start button the game will start and you
+                will have 20 seconds to answer each question.
+              </li>
+              <li>
+                If you answer correct, in the next question you will have 0.5
+                second less than the previous question.
+              </li>
+              <li>You have only one chance to answer correctly</li>
+              <li>
+                You have only 3 life, once you answer wrong on 3 questions the
+                game will be over.
+              </li>
+            </ul>
+          </div>
+          <button onClick={highScoreButton}>High scores table</button>
+          <button onClick={startButton}>Start</button>
+          <div className="high-score-div">
+            {clickedHighScore && (
+              <table className="high-score-table">
+                <thead>
+                  <tr>
+                    <th>Rank</th>
+                    <th>User</th>
+                    <th>Score</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {highScore.map((obj, i) => (
+                    <tr key={i}>
+                      <td>{i + 1}</td>
+                      <td>{obj.name}</td>
+                      <td>{obj.score}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   );
 }

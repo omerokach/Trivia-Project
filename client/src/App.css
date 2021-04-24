@@ -20,6 +20,8 @@ body {
   transform: translate(-50%, -50%);
 }
 
+/* login page */
+
 .login-page h1 {
   font-size: 2.5rem;
 }
@@ -60,4 +62,14 @@ body {
 .login-div .error-div {
   color: red;
   margin-top: 1rem;
+}
+
+/* main page */
+
+.main-div h1 {
+  font-size: 3rem;
+}
+
+.main-div .high-score-div .high-score-table {
+  margin: auto;
 }
