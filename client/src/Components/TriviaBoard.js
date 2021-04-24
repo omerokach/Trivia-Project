@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useHistory } from "react";
+import React, { useState, useEffect } from "react";
 import AfterAnswer from "./AfterAnswer";
 import Question from "./Question";
 import axios from "axios";
@@ -16,8 +16,8 @@ export default function TriviaBoard({ firstQuestion }) {
   };
   const [timer, setTimer] = useState(updateTimer);
   const [questionAsked, setQuestionAsked] = useState(1);
-  const [nextQeustion, setNextQuestion] = useState(false);
   const [playerScore, setPlayerScore] = useState(0);
+  const ratingArr = [];
 
   const getSavedQuestion = async () => {
     try {
@@ -38,19 +38,6 @@ export default function TriviaBoard({ firstQuestion }) {
       console.log(error.response);
     }
   };
-
-  // useEffect(() => {
-  //   let counter = timer;
-  //   const interval = setInterval(() => {
-  //     console.log(counter);
-  //     counter--;
-  //     setTimer((prev) => (prev = counter));
-  //     if (counter <= 0 || displayState !== 1) {
-  //       clearInterval(interval);
-  //       return;
-  //     }
-  //   }, 1000);
-  // }, []);
 
   useEffect(() => {
     const count =
@@ -77,6 +64,10 @@ export default function TriviaBoard({ firstQuestion }) {
       setIsLastAnswerCorrect(false);
       setWrongAnswer((prev) => prev + 1);
     }
+  };
+
+  const userRatingSave = (rating, question) => {
+    ratingArr.push({ rating, question });
   };
 
   return (
@@ -107,6 +98,7 @@ export default function TriviaBoard({ firstQuestion }) {
           updateTimer={updateTimer}
           setTimer={setTimer}
           wrongAnswers={wrongAnswers}
+          userRatingSave={userRatingSave}
         />
       ) : (
         ""

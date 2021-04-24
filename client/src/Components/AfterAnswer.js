@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 function AfterAnswer({
   setDisplayState,
@@ -12,11 +12,10 @@ function AfterAnswer({
   updateTimer,
   setTimer,
   wrongAnswers,
+  userRatingSave,
 }) {
   console.log(currentQuestion);
-
-  const ratingFunc = (e) => {};
-
+  const [isRated, setIsRated] = useState(false);
   const continueButton = async () => {
     if (wrongAnswers === 3) {
       console.log("loose");
@@ -32,6 +31,11 @@ function AfterAnswer({
       getSavedQuestion();
       setTimer(updateTimer());
     }
+  };
+
+  const ratingOnce = (questionRating, question) => {
+    setIsRated(true);
+    userRatingSave(questionRating, question);
   };
 
   return (
@@ -56,13 +60,66 @@ function AfterAnswer({
         ))}
       </ul>
       <div>
-        <span id="1" onClick={(e) => console.log(e.target.id)}>
+        <span
+          id="1"
+          onClick={
+            isRated === false
+              ? (e) => {
+                  ratingOnce(e.target.id, currentQuestion.question);
+                }
+              : null
+          }
+        >
           1⭐{" "}
         </span>
-        <span id="2">2⭐ </span>
-        <span id="3">3⭐ </span>
-        <span id="4">4⭐ </span>
-        <span id="5">5⭐ </span>
+        <span
+          id="2"
+          onClick={
+            isRated === false
+              ? (e) => {
+                  ratingOnce(e.target.id, currentQuestion.question);
+                }
+              : null
+          }
+        >
+          2⭐{" "}
+        </span>
+        <span
+          id="3"
+          onClick={
+            isRated === false
+              ? (e) => {
+                  ratingOnce(e.target.id, currentQuestion.question);
+                }
+              : null
+          }
+        >
+          3⭐{" "}
+        </span>
+        <span
+          id="4"
+          onClick={
+            isRated === false
+              ? (e) => {
+                  ratingOnce(e.target.id, currentQuestion.question);
+                }
+              : null
+          }
+        >
+          4⭐{" "}
+        </span>
+        <span
+          id="5"
+          onClick={
+            isRated === false
+              ? (e) => {
+                  ratingOnce(e.target.id, currentQuestion.question);
+                }
+              : null
+          }
+        >
+          5⭐{" "}
+        </span>
       </div>
       <button onClick={() => continueButton()}>
         {wrongAnswers === 3 ? "Back to homepage" : "Continue ↪"}
