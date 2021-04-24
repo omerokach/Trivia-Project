@@ -11,6 +11,7 @@ export default function TriviaBoard({ firstQuestion }) {
   const [timeToAnswer, setTimeToAnswer] = useState([]);
   const [isLastAnswerCorrect, setIsLastAnswerCorrect] = useState(false);
   const [displayState, setDisplayState] = useState(1);
+  const [isTimeOver, setIsTimeOver] = useState(false);
   let timerCount = 20;
   const updateTimer = () => {
     return timerCount > 5 ? 20 - 0.5 * correctAnswers : 5;
@@ -45,7 +46,11 @@ export default function TriviaBoard({ firstQuestion }) {
       timer > 0 &&
       displayState === 1 &&
       setInterval(() => setTimer(timer - 1), 1000);
-    console.log(displayState);
+    if (timer === 0) {
+      setIsTimeOver(true);
+      setDisplayState(2);
+      setWrongAnswer((prev) => prev + 1);
+    }
     return () => clearInterval(count);
   }, [timer]);
 
@@ -100,6 +105,8 @@ export default function TriviaBoard({ firstQuestion }) {
           setTimer={setTimer}
           wrongAnswers={wrongAnswers}
           userRatingSave={userRatingSave}
+          isTimeOver={isTimeOver}
+          setIsTimeOver={setIsTimeOver}
         />
       ) : (
         ""

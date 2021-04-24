@@ -14,6 +14,8 @@ function AfterAnswer({
   setTimer,
   wrongAnswers,
   userRatingSave,
+  isTimeOver,
+  setIsTimeOver,
 }) {
   console.log(currentQuestion);
   const [isRated, setIsRated] = useState(false);
@@ -22,6 +24,8 @@ function AfterAnswer({
       console.log("loose");
       return;
     }
+
+    setIsTimeOver(false);
 
     if (questionAsked % 3 === 0) {
       setDisplayState(1);
@@ -41,11 +45,21 @@ function AfterAnswer({
 
   return (
     <div>
-      <h1>{isLastAnswerCorrect ? "Correct! 🎊" : "Wrong! 😥"}</h1>
       <h2>
-        Took you {timeToAnswer[timeToAnswer.length - 1]} seconds to answer the
-        question
+        {isTimeOver
+          ? "Sorry, you run out of time.."
+          : isLastAnswerCorrect
+          ? "Correct! 🎊"
+          : "Wrong! 😥"}
       </h2>
+      {isTimeOver === false ? (
+        <h2>
+          Took you {timeToAnswer[timeToAnswer.length - 1]} seconds to answer the
+          question
+        </h2>
+      ) : (
+        ""
+      )}
       <h4>Your score: {playerScore}</h4>
       {isLastAnswerCorrect ? (
         ""
@@ -54,8 +68,8 @@ function AfterAnswer({
       )}
       <p>Question about: {currentQuestion.questionAbout}</p>
       <ul>
-        {currentQuestion.questionValues.map((obj) => (
-          <li>
+        {currentQuestion.questionValues.map((obj, i) => (
+          <li key={i}>
             {obj.country} <strong>{obj[currentQuestion.parameterB]}</strong>
           </li>
         ))}
