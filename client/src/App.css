@@ -167,3 +167,53 @@ td {
 .board-div .question-div ul li:hover {
   background-color: lightgreen;
 }
+
+/* after answer style */
+
+.after-answer-div .after-answer-information {
+  margin: 1rem;
+  display: flex;
+  justify-content: space-around;
+}
+
+.after-answer-div ul {
+  margin: 1rem 0 1rem 3rem;
+  list-style-position: inside;
+  text-align: left;
+}
+
+.after-answer-div .rating {
+  margin: 2rem;
+}
+
+.after-answer-div .rating p {
+  margin-bottom: 0.5rem;
+}
+
+.after-answer-div .rating span {
+  margin-right: 1rem;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.after-answer-div .rating span:hover {
+  position: relative;
+  top: -5px;
+}
+
+.after-answer-div button {
+  float: left;
+  margin-left: 3rem;
+  padding: 0.2rem;
+  font-size: 1rem;
+  background-color: transparent;
+  border: 1px solid black;
+  border-radius: 5px;
+  outline: none;
+  cursor: pointer;
+}
+
+.after-answer-div button:hover {
+  background-color: black;
+  color: white;
+}

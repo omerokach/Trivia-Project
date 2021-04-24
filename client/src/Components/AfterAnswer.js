@@ -44,29 +44,31 @@ function AfterAnswer({
   };
 
   return (
-    <div>
-      <h2>
+    <div className="after-answer-div">
+      <h3>
         {isTimeOver
           ? "Sorry, you run out of time.."
           : isLastAnswerCorrect
           ? "Correct! 🎊"
           : "Wrong! 😥"}
-      </h2>
+      </h3>
       {isTimeOver === false ? (
-        <h2>
+        <h3>
           Took you {timeToAnswer[timeToAnswer.length - 1]} seconds to answer the
           question
-        </h2>
+        </h3>
       ) : (
         ""
       )}
-      <h4>Your score: {playerScore}</h4>
-      {isLastAnswerCorrect ? (
-        ""
-      ) : (
-        <p>The right answer is: {currentQuestion.answer}</p>
-      )}
-      <p>Question about: {currentQuestion.questionAbout}</p>
+      <div className="after-answer-information">
+        <h4>Your score: {playerScore}</h4>
+        {isLastAnswerCorrect ? (
+          ""
+        ) : (
+          <p>The right answer is: {currentQuestion.answer}</p>
+        )}
+        <p>Question about: {currentQuestion.questionAbout}</p>
+      </div>
       <ul>
         {currentQuestion.questionValues.map((obj, i) => (
           <li key={i}>
@@ -74,7 +76,8 @@ function AfterAnswer({
           </li>
         ))}
       </ul>
-      <div>
+      <div className="rating">
+        <p>Rate the question if you liked her!</p>
         <span
           id="1"
           onClick={
