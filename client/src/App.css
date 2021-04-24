@@ -70,6 +70,61 @@ body {
   font-size: 3rem;
 }
 
-.main-div .high-score-div .high-score-table {
-  margin: auto;
+.main-div h2 {
+  margin: 1rem;
+}
+
+.main-div .start-page {
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 1.5rem;
+}
+
+.main-div .start-page .instruction {
+  text-align: left;
+  margin-bottom: 1rem;
+}
+
+.main-div .start-page .instruction h3 {
+  margin-bottom: 0.5rem;
+  text-decoration: underline;
+}
+
+.main-div .start-page button {
+  font-size: 1rem;
+  margin-right: 1rem;
+  padding: 0.2rem;
+  background-color: transparent;
+  border: 1px solid black;
+  border-radius: 5px;
+  cursor: pointer;
+  outline: none;
+}
+
+.main-div .start-page button:hover {
+  background-color: black;
+  color: white;
+  transform: scale(1.2);
+}
+
+.main-div .start-page .high-score-div .high-score-table {
+  margin: 1rem auto 0 auto;
+  border-collapse: collapse;
+  width: 60%;
+  text-align: left;
+}
+
+.main-div .start-page .high-score-div .high-score-table th,
+td {
+  border: 1px solid #ddd;
+  padding: 0.7rem;
+}
+
+.main-div .start-page .high-score-div .high-score-table tr:hover {
+  background-color: #ddd;
+}
+
+.main-div .start-page .high-score-div .high-score-table th {
+  background-color: #4caf50;
+  color: white;
 }
