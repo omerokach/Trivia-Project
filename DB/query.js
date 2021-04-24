@@ -310,8 +310,8 @@ async function questionGenerator() {
   }
 }
 
-(async function a() {
-  Question.create(await questionGenerator());
-})();
+// (async function a() {
+//   Question.create(await questionGenerator());
+// })();
 
 module.exports = { questionGenerator };

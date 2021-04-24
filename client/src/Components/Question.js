@@ -1,5 +1,7 @@
 import React from "react";
+import "../App.css";
 import AnswerOption from "./AnswerOption";
+
 function Question({
   currentQuestion,
   questionAsked,

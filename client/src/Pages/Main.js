@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router";
 import axios from "axios";
+import "../App.css";
 import TriviaBoard from "../Components/TriviaBoard";
 
 export default function Main() {
   const [start, setStart] = useState(false);
   const [firstQuestion, setFirstQuestion] = useState({});
+  const history = useHistory();
 
   const getSavedQuestion = async () => {
     try {
@@ -25,8 +27,6 @@ export default function Main() {
     const res = await axios.get("/high_score");
     console.log(res.data);
   };
-
-  const history = useHistory();
 
   return (
     <div>

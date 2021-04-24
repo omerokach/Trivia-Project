@@ -1,38 +1,63 @@
-.App {
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+}
+
+body {
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.App {
+  width: 650px;
+  height: 450px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.login-page h1 {
+  font-size: 2.5rem;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.login-div {
+  border: 1px solid black;
+  margin: 1rem auto 0 auto;
+  padding-bottom: 1rem;
+  width: 400px;
 }
 
-.App-link {
-  color: #61dafb;
+.login-div h2 {
+  margin: 1rem;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.login-div input {
+  margin: 0 0.5rem 0 0.5rem;
+  outline: none;
+  border: 1px solid black;
+  border-radius: 5px;
+  height: 1.5rem;
+  padding: 0.5rem;
+}
+
+.login-div button {
+  padding: 0.2rem;
+  background-color: transparent;
+  outline: none;
+  border: 1px solid black;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.login-div button:hover {
+  background-color: lightblue;
+}
+
+.login-div .error-div {
+  color: red;
+  margin-top: 1rem;
 }

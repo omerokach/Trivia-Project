@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import AfterAnswer from "./AfterAnswer";
 import Question from "./Question";
 import axios from "axios";
+import "../App.css";
 
 export default function TriviaBoard({ firstQuestion }) {
   const [currentQuestion, setCurrentQuestion] = useState(firstQuestion);
