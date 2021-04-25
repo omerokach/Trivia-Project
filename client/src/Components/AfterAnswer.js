@@ -19,19 +19,48 @@ function AfterAnswer({
   setIsTimeOver,
   setStart,
   playerRank,
+  setQuestionShowedId,
+  questionShowedId,
 }) {
   console.log(currentQuestion);
   const [isRated, setIsRated] = useState(false);
+
+  const chancesArrFunc = (theChanceOfSavedQuestion) => {
+    const chancesArr = [];
+    for (let i = 0; i < theChanceOfSavedQuestion; i++) {
+      chancesArr.push("saved");
+    }
+    for (let i = 0; i < 100 - theChanceOfSavedQuestion; i++) {
+      chancesArr.push("generated");
+    }
+    const randomIndex = Math.floor(Math.random() * chancesArr.length);
+    return chancesArr[randomIndex];
+  };
 
   const continueButton = async () => {
     if (wrongAnswers === 3) {
       setStart(false);
       return;
     }
-
+    const savedQuestionsArr = await axios.get("/trivia/all_saved_questions");
+    const numOfQuestionDidntAsked =
+      savedQuestionsArr.data.length - questionShowedId.length;
     setIsTimeOver(false);
+    let randomQuestion = "";
+    let theChanceOfSavedQuestion = "";
+    if (numOfQuestionDidntAsked > 100) {
+      theChanceOfSavedQuestion = 70;
+      randomQuestion = chancesArrFunc(theChanceOfSavedQuestion);
+    } else if (numOfQuestionDidntAsked <= 100 && numOfQuestionDidntAsked > 0) {
+      theChanceOfSavedQuestion = Math.floor(
+        (0.006 * numOfQuestionDidntAsked + 0.1) * 100
+      );
+      randomQuestion = chancesArrFunc(theChanceOfSavedQuestion);
+    } else {
+      randomQuestion = "generated";
+    }
 
-    if (questionAsked % 2 === 0) {
+    if (randomQuestion === "generated") {
       setDisplayState(1);
       getGeneratedQuestion();
       setTimer(updateTimer());
@@ -52,7 +81,7 @@ function AfterAnswer({
           "/trivia/save_new_question",
           currentQuestion
         );
-        console.log(dbRes.message);
+        setQuestionShowedId((prev) => [...prev, dbRes.questionId]);
       } catch (error) {
         console.log(error);
       }

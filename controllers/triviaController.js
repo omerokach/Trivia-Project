@@ -36,6 +36,17 @@ const questionObjFunction = (question) => {
   return questionObj;
 };
 
+module.exports.allSavedQuestions_get = async (req, res) => {
+  try {
+    const response = await Question.findAll({});
+    const savedQuestions = response.map(data => data.toJSON());
+    return res.status(200).json(savedQuestions)
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({message: error})
+  }
+}; 
+
 module.exports.generateQuestion_get = async (req, res) => {
   try {
     const question = await questionGenerator();
@@ -60,9 +71,9 @@ module.exports.saveNewQuestion_post = async (req, res) => {
     });
     if (!ifExist) {
       const dbRes = await Question.create(newQuestion);
-      return res.status(201).json({ message: "success" });
+      return res.status(201).json({ message: "success", questionId: dbRes.dataValues.id });
     } else {
-      return res.status(200).json({ message: "success" });
+      return res.status(200).json({ message: "Question already exist" });
     }
   } catch (error) {
     res.status(500).json({ message: error.message });

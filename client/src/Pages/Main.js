@@ -8,10 +8,12 @@ export default function Main({ userName }) {
   const [firstQuestion, setFirstQuestion] = useState({});
   const [clickedHighScore, setClickedHighScore] = useState(false);
   const [highScore, setHighScore] = useState([]);
+  const [questionShowedId, setQuestionShowedId] = useState([]);
 
   const getSavedQuestion = async () => {
     try {
       const res = await axios.get("/trivia/saved_question");
+      setQuestionShowedId(prev => [...prev, res.data.id])
       setFirstQuestion(res.data);
     } catch (error) {
       console.log(error);
@@ -41,6 +43,8 @@ export default function Main({ userName }) {
           firstQuestion={firstQuestion}
           setStart={setStart}
           userName={userName}
+          questionShowedId ={questionShowedId} 
+          setQuestionShowedId = {setQuestionShowedId}
         />
       ) : (
         <div className="start-page">

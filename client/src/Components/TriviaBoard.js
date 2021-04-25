@@ -4,7 +4,7 @@ import Question from "./Question";
 import axios from "axios";
 import "../App.css";
 
-export default function TriviaBoard({ firstQuestion, setStart, userName }) {
+export default function TriviaBoard({ firstQuestion, setStart, userName, questionShowedId, setQuestionShowedId }) {
   const [currentQuestion, setCurrentQuestion] = useState(firstQuestion);
   const [correctAnswers, setCorrectAnswer] = useState(0);
   const [wrongAnswers, setWrongAnswer] = useState(0);
@@ -24,9 +24,16 @@ export default function TriviaBoard({ firstQuestion, setStart, userName }) {
 
   const getSavedQuestion = async () => {
     try {
+      let questionAllreadyShowed = false;
       const res = await axios.get("/trivia/saved_question");
+      questionAllreadyShowed = questionShowedId.includes(res.data.id);
+      while (!questionAllreadyShowed) {
+        const res = await axios.get("/trivia/saved_question");
+        questionAllreadyShowed = questionShowedId.includes(res.data.id);
+      }
       setQuestionAsked((prev) => prev + 1);
-      setCurrentQuestion(res.data);
+      setCurrentQuestion(res.data); 
+      setQuestionShowedId((prev) => [...prev, res.data.id]);
     } catch (error) {
       console.log(error.response);
     }
@@ -128,6 +135,8 @@ export default function TriviaBoard({ firstQuestion, setStart, userName }) {
           setIsTimeOver={setIsTimeOver}
           setStart={setStart}
           playerRank={playerRank}
+          setQuestionShowedId={setQuestionShowedId}
+          questionShowedId={questionShowedId}
         />
       ) : (
         ""
