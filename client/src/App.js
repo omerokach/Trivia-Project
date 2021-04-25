@@ -9,19 +9,27 @@ function App() {
   const [userName, setUserName] = useState("");
 
   return (
-    <div className="App">
-      <Router>
-        <Switch>
-          <Route exact path="/">
-            <Login userName={userName} setUserName={setUserName} />
-          </Route>
-          <Route exact path="/signin" component={SignIn} />
-          <Route exact path="/main">
-            <Main userName={userName} />
-          </Route>
-        </Switch>
-      </Router>
-    </div>
+    <>
+      <div className="header">
+        <h1>Cross Countries Trivia</h1>
+      </div>
+      <div className="App">
+        <Router>
+          <Switch>
+            <Route exact path="/">
+              <Login userName={userName} setUserName={setUserName} />
+            </Route>
+            <Route exact path="/signin" component={SignIn} />
+            <Route exact path="/main">
+              <Main userName={userName} />
+            </Route>
+          </Switch>
+        </Router>
+      </div>
+      <footer className="footer">
+        <small>© Omer Rokach, Dvir Yadai</small>
+      </footer>
+    </>
   );
 }
 

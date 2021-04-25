@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap");
 
 * {
   margin: 0;
@@ -9,26 +9,45 @@
 
 body {
   text-align: center;
+  background-color: #fce38a;
+}
+
+.header {
+  width: 100%;
+  height: 5rem;
+  background-color: #f38181;
+  display: flex;
+  align-items: center;
+}
+
+.header h1 {
+  margin-left: 1rem;
+  font-family: "Roboto", sans-serif, 500;
 }
 
 .App {
-  width: 650px;
-  height: 450px;
+  width: 50rem;
+  height: 32rem;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  background-color: #eaffd0;
+  border-radius: 5px;
+  box-shadow: 5px 5px 20px #6f726b;
 }
 
 /* login page */
 
 .login-page h1 {
   font-size: 2.5rem;
+  margin-top: 2rem;
 }
 
 .login-div {
   border: 1px solid black;
-  margin: 1rem auto 0 auto;
+  border-radius: 5px;
+  margin: 3rem auto 0 auto;
   padding-bottom: 1rem;
   width: 400px;
 }
@@ -56,7 +75,8 @@ body {
 }
 
 .login-div button:hover {
-  background-color: lightblue;
+  background-color: black;
+  color: white;
 }
 
 .login-div .error-div {
@@ -75,14 +95,12 @@ body {
 }
 
 .main-div .start-page {
-  border: 1px solid black;
-  border-radius: 5px;
   padding: 1.5rem;
 }
 
 .main-div .start-page .instruction {
   text-align: left;
-  margin-bottom: 1rem;
+  margin: 3rem 1.5rem 2rem 1.5rem;
 }
 
 .main-div .start-page .instruction h3 {
@@ -107,6 +125,27 @@ body {
   transform: scale(1.2);
 }
 
+.main-div .start-page .high-score-div {
+  width: 15rem;
+  height: 15rem;
+  overflow: auto;
+  margin: 1rem auto;
+}
+
+.main-div .start-page .high-score-div::-webkit-scrollbar {
+  width: 8px;
+}
+
+.main-div .start-page .high-score-div::-webkit-scrollbar-thumb {
+  background-color: rgb(5, 154, 253);
+  border-radius: 20px;
+}
+
+.main-div .start-page .high-score-div::-webkit-scrollbar-track {
+  background-color: rgb(173, 228, 230);
+  border-radius: 20px;
+}
+
 .main-div .start-page .high-score-div .high-score-table {
   margin: 1rem auto 0 auto;
   border-collapse: collapse;
@@ -129,12 +168,16 @@ td {
   color: white;
 }
 
+.main-div .start-page .high-score-div .high-score-table td {
+  background-color: #c6ecc7;
+}
+
 /* board style */
 
 .board-div .board-information {
   display: flex;
   justify-content: space-around;
-  margin: 2rem auto 1rem auto;
+  margin: 3rem auto 3rem auto;
 }
 
 .board-div .timer {
@@ -145,10 +188,8 @@ td {
 }
 
 .board-div .question-div {
-  border: 1px solid black;
-  border-radius: 5px;
   padding: 1rem 2rem;
-  margin-top: 1rem;
+  margin-top: 2rem;
 }
 
 .board-div .question-div h4 {
@@ -170,12 +211,13 @@ td {
 
 /* after answer style */
 
-.after-answer-div h1 {
+.after-answer-div h2 {
   font-size: 2rem;
+  margin-top: 2rem;
 }
 
 .after-answer-div .after-answer-information {
-  margin: 1rem;
+  margin: 3rem 2rem;
   display: flex;
   justify-content: space-around;
 }
@@ -220,4 +262,15 @@ td {
 .after-answer-div button:hover {
   background-color: black;
   color: white;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  height: 4rem;
+  width: 100%;
+  background-color: #f0ca50;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
