@@ -73,6 +73,7 @@ function AfterAnswer({
 
   const ratingOnce = async (questionRating, questionId) => {
     setIsRated(true);
+
     if (!currentQuestion.id) {
       currentQuestion.numOfVotes += 1;
       currentQuestion.rating = questionRating;
@@ -133,7 +134,11 @@ function AfterAnswer({
         ))}
       </ul>
       <div className="rating">
-        <p>Rate the question if you liked her!</p>
+        <p>
+          {isRated
+            ? "Thank you for rating ✔"
+            : "Rate the question if you liked her!"}
+        </p>
         <span
           id="1"
           onClick={

@@ -211,6 +211,11 @@ td {
 
 /* after answer style */
 
+.after-answer-div h1 {
+  font-size: 2rem;
+  margin-top: 1rem;
+}
+
 .after-answer-div h2 {
   font-size: 2rem;
   margin-top: 2rem;
