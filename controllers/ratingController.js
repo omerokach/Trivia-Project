@@ -38,10 +38,11 @@ module.exports.ratings_post = async (req, res) => {
       });
       resDataArr.push(resData.dataValues);
     }
+    data.ratingArr.map(async (obj, i) => {
+      await calculateQuestionRating(obj.questionId);
+    });
+    res.status(201).json({ message: "success" });
   } catch (error) {
-    console.log(error);
+    res.status(500).json({ message: error.message });
   }
-  data.ratingArr.map(async (obj, i) => {
-    await calculateQuestionRating(obj.questionId);
-  });
 };

@@ -22,7 +22,6 @@ function AfterAnswer({
   setQuestionShowedId,
   questionShowedId,
 }) {
-  console.log(currentQuestion);
   const [isRated, setIsRated] = useState(false);
 
   const chancesArrFunc = (theChanceOfSavedQuestion) => {
