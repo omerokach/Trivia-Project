@@ -193,43 +193,78 @@ function questionGeneratorTypeOneFunc() {
   });
 }
 
-function questionGeneratorTypeTwoFunc() {
+async function questionGeneratorTypeTwoFunc() {
   const questionTemplate =
     typeTwoTemplateArr[Math.floor(Math.random() * typeTwoTemplateArr.length)];
   const { column } = questionTemplate;
   let { template } = questionTemplate;
+  let countries = [];
+  if (column === "continent") {
+    const continentArr = [
+      "Asia",
+      "Europe",
+      "Africa",
+      "Australia",
+      "North America",
+      "South America",
+      "Central America",
+    ];
+    for (let i = 0; i <= 3; i++) {
+      const continentIndex = Math.floor(Math.random() * continentArr.length);
+      let continent = continentArr[continentIndex];
+      const country = await CountriesTable.findOne({
+        order: Sequelize.literal("rand()"),
+        attributes: ["country", column],
+        where: {
+          [Op.and]: [
+            {
+              [Op.or]: [
+                { [column]: { [Op.ne]: null } },
+                { [column]: { [Op.ne]: undefined } },
+              ],
+            },
+            {
+              [column]: continent,
+            },
+          ],
+        },
+      });
+      countries.push(country);
+      continentArr.splice(continentIndex, 1);
+    }
+  } else {
+    countries = await CountriesTable.findAll({
+      order: Sequelize.literal("rand()"),
+      limit: 4,
+      attributes: ["country", column],
+      where: {
+        [Op.or]: [
+          { [column]: { [Op.ne]: null } },
+          { [column]: { [Op.ne]: undefined } },
+        ],
+      },
+    });
+  }
 
-  return CountriesTable.findAll({
-    order: Sequelize.literal("rand()"),
-    limit: 4,
-    attributes: ["country", column],
-    where: {
-      [Op.or]: [
-        { [column]: { [Op.ne]: null } },
-        { [column]: { [Op.ne]: undefined } },
-      ],
-    },
-  }).then((countries) => {
-    const typeTwoQuestionObj = {};
-    const valuesArr = countries.map((country) => country.toJSON());
+  const typeTwoQuestionObj = {};
+  const valuesArr = countries.map((country) => country.toJSON());
 
-    template = template.replace("country", valuesArr[0].country);
+  template = template.replace("country", valuesArr[0].country);
 
-    typeTwoQuestionObj.type = "type_Two";
-    typeTwoQuestionObj.question = template;
-    typeTwoQuestionObj.questionValues = JSON.stringify(valuesArr);
-    typeTwoQuestionObj.answer = valuesArr.shift()[column];
-    typeTwoQuestionObj.optionA = valuesArr.pop()[column];
-    typeTwoQuestionObj.optionB = valuesArr.pop()[column];
-    typeTwoQuestionObj.optionC = valuesArr.pop()[column];
-    typeTwoQuestionObj.questionAbout = questionTemplate.questionAbout;
-    typeTwoQuestionObj.parameterA = "country";
-    typeTwoQuestionObj.parameterB = column;
-    typeTwoQuestionObj.rating = 0;
-    typeTwoQuestionObj.numOfVotes = 0;
+  typeTwoQuestionObj.type = "type_Two";
+  typeTwoQuestionObj.question = template;
+  typeTwoQuestionObj.questionValues = JSON.stringify(valuesArr);
+  typeTwoQuestionObj.answer = valuesArr.shift()[column];
+  typeTwoQuestionObj.optionA = valuesArr.pop()[column];
+  typeTwoQuestionObj.optionB = valuesArr.pop()[column];
+  typeTwoQuestionObj.optionC = valuesArr.pop()[column];
+  typeTwoQuestionObj.questionAbout = questionTemplate.questionAbout;
+  typeTwoQuestionObj.parameterA = "country";
+  typeTwoQuestionObj.parameterB = column;
+  typeTwoQuestionObj.rating = 0;
+  typeTwoQuestionObj.numOfVotes = 0;
 
-    return typeTwoQuestionObj;
-  });
+  return typeTwoQuestionObj;
 }
 
 function questionGeneratorTypeThreeFunc() {
@@ -309,8 +344,10 @@ async function questionGenerator() {
   }
 }
 
-// (async function a() {
-//   Question.create(await questionGenerator());
-// })();
+(async function a() {
+  for (let i = 0; i < 20; i++) {
+    Question.create(await questionGenerator());
+  }
+})();
 
 module.exports = { questionGenerator };
