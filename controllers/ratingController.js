@@ -25,8 +25,6 @@ const calculateQuestionRating = async (questionId) => {
   );
 };
 
-module.exports.ratings_get = async (req, res) => {};
-
 module.exports.ratings_post = async (req, res) => {
   const data = req.body;
   let resDataArr = [];
