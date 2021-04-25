@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import "../App.css";
 import TriviaBoard from "../Components/TriviaBoard";
+import Swal from "sweetalert2";
 
 export default function Main({ userName }) {
   const [start, setStart] = useState(false);
@@ -10,18 +11,21 @@ export default function Main({ userName }) {
   const [highScore, setHighScore] = useState([]);
   const [questionShowedId, setQuestionShowedId] = useState([]);
 
-  const getSavedQuestion = async () => {
+  const startButton = async () => {
     try {
       const res = await axios.get("/trivia/saved_question");
       setQuestionShowedId((prev) => [...prev, res.data.id]);
       setFirstQuestion(res.data);
     } catch (error) {
       console.log(error);
+      Swal.fire({
+        title: "Error!",
+        text: "Our server's are down for the moment, Hang tight!",
+        icon: "error",
+        confirmButtonText: "Cool",
+      });
+      return;
     }
-  };
-
-  const startButton = async () => {
-    await getSavedQuestion();
     setStart(true);
   };
 
@@ -32,7 +36,13 @@ export default function Main({ userName }) {
       const sorted = res.data.sort((a, b) => b.score - a.score);
       setHighScore(sorted);
     } catch (error) {
-      console.log(error);
+      Swal.fire({
+        title: "Error!",
+        text: "Our server's are down for the moment, Hang tight!",
+        icon: "error",
+        confirmButtonText: "Cool",
+      });
+      return;
     }
   };
 

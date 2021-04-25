@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "../App.css";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 function AfterAnswer({
   setDisplayState,
@@ -9,8 +10,6 @@ function AfterAnswer({
   timeToAnswer,
   playerScore,
   questionAsked,
-  getGeneratedQuestion,
-  getSavedQuestion,
   updateTimer,
   setTimer,
   wrongAnswers,
@@ -21,8 +20,51 @@ function AfterAnswer({
   playerRank,
   setQuestionShowedId,
   questionShowedId,
+  setQuestionAsked,
+  setCurrentQuestion,
 }) {
   const [isRated, setIsRated] = useState(false);
+
+  const getGeneratedQuestion = async () => {
+    try {
+      const res = await axios.get("/trivia/generate_question");
+      setQuestionAsked((prev) => prev + 1);
+      setCurrentQuestion(res.data);
+    } catch (error) {
+      console.log(error);
+      Swal.fire({
+        title: "Error!",
+        text: "Our server's are down for the moment, Hang tight!",
+        icon: "error",
+        confirmButtonText: "Cool",
+      });
+      return;
+    }
+  };
+
+  const getSavedQuestion = async () => {
+    try {
+      let questionAllreadyShowed = false;
+      const res = await axios.get("/trivia/saved_question");
+      questionAllreadyShowed = questionShowedId.includes(res.data.id);
+      while (!questionAllreadyShowed) {
+        const res = await axios.get("/trivia/saved_question");
+        questionAllreadyShowed = questionShowedId.includes(res.data.id);
+      }
+      setQuestionAsked((prev) => prev + 1);
+      setCurrentQuestion(res.data);
+      setQuestionShowedId((prev) => [...prev, res.data.id]);
+    } catch (error) {
+      console.log(error);
+      Swal.fire({
+        title: "Error!",
+        text: "Our server's are down for the moment, Hang tight!",
+        icon: "error",
+        confirmButtonText: "Cool",
+      });
+      return;
+    }
+  };
 
   const chancesArrFunc = (theChanceOfSavedQuestion) => {
     const chancesArr = [];
@@ -41,38 +83,49 @@ function AfterAnswer({
       setStart(false);
       return;
     }
-    const savedQuestionsArr = await axios.get("/trivia/all_saved_questions");
-    const numOfQuestionDidntAsked =
-      savedQuestionsArr.data.length - questionShowedId.length;
-    setIsTimeOver(false);
-    let randomQuestion = "";
-    let theChanceOfSavedQuestion = "";
-    if (numOfQuestionDidntAsked > 100) {
-      theChanceOfSavedQuestion = 70;
-      randomQuestion = chancesArrFunc(theChanceOfSavedQuestion);
-    } else if (numOfQuestionDidntAsked <= 100 && numOfQuestionDidntAsked > 0) {
-      theChanceOfSavedQuestion = Math.floor(
-        (0.006 * numOfQuestionDidntAsked + 0.1) * 100
-      );
-      randomQuestion = chancesArrFunc(theChanceOfSavedQuestion);
-    } else {
-      randomQuestion = "generated";
-    }
+    try {
+      const savedQuestionsArr = await axios.get("/trivia/all_saved_questions");
+      const numOfQuestionDidntAsked =
+        savedQuestionsArr.data.length - questionShowedId.length;
+      setIsTimeOver(false);
+      let randomQuestion = "";
+      let theChanceOfSavedQuestion = "";
+      if (numOfQuestionDidntAsked > 100) {
+        theChanceOfSavedQuestion = 70;
+        randomQuestion = chancesArrFunc(theChanceOfSavedQuestion);
+      } else if (
+        numOfQuestionDidntAsked <= 100 &&
+        numOfQuestionDidntAsked > 0
+      ) {
+        theChanceOfSavedQuestion = Math.floor(
+          (0.006 * numOfQuestionDidntAsked + 0.1) * 100
+        );
+        randomQuestion = chancesArrFunc(theChanceOfSavedQuestion);
+      } else {
+        randomQuestion = "generated";
+      }
 
-    if (randomQuestion === "generated") {
-      setDisplayState(1);
-      getGeneratedQuestion();
-      setTimer(updateTimer());
-    } else {
-      setDisplayState(1);
-      getSavedQuestion();
-      setTimer(updateTimer());
+      if (randomQuestion === "generated") {
+        setDisplayState(1);
+        await getGeneratedQuestion();
+        setTimer(updateTimer());
+      } else {
+        setDisplayState(1);
+        await getSavedQuestion();
+        setTimer(updateTimer());
+      }
+    } catch (error) {
+      Swal.fire({
+        title: "Error!",
+        text: "Our server's are down for the moment, Hang tight!",
+        icon: "error",
+        confirmButtonText: "Cool",
+      });
+      return;
     }
   };
 
   const ratingOnce = async (questionRating, questionId) => {
-    setIsRated(true);
-
     if (!currentQuestion.id) {
       currentQuestion.numOfVotes += 1;
       currentQuestion.rating = questionRating;
@@ -82,11 +135,13 @@ function AfterAnswer({
           currentQuestion
         );
         setQuestionShowedId((prev) => [...prev, dbRes.questionId]);
+        setIsRated(true);
       } catch (error) {
         console.log(error);
       }
     } else {
       userRatingSave(questionRating, questionId);
+      setIsRated(true);
     }
   };
 

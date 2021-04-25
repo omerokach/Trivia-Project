@@ -41,8 +41,8 @@ module.exports.ratings_post = async (req, res) => {
     data.ratingArr.map(async (obj, i) => {
       await calculateQuestionRating(obj.questionId);
     });
-    res.status(201).json({ message: "success" });
+    return res.status(201).json({ message: "success" });
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    return res.status(500).json({ message: error.message });
   }
 };

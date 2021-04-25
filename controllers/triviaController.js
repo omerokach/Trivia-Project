@@ -39,20 +39,20 @@ const questionObjFunction = (question) => {
 module.exports.allSavedQuestions_get = async (req, res) => {
   try {
     const response = await Question.findAll({});
-    const savedQuestions = response.map(data => data.toJSON());
-    return res.status(200).json(savedQuestions)
+    const savedQuestions = response.map((data) => data.toJSON());
+    return res.status(200).json(savedQuestions);
   } catch (error) {
     console.log(error);
-    return res.status(500).json({message: error})
+    return res.status(500).json({ message: error });
   }
-}; 
+};
 
 module.exports.generateQuestion_get = async (req, res) => {
   try {
     const question = await questionGenerator();
-    res.status(200).json(questionObjFunction(question));
+    return res.status(200).json(questionObjFunction(question));
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    return res.status(500).json({ message: error.message });
   }
 };
 
@@ -71,7 +71,9 @@ module.exports.saveNewQuestion_post = async (req, res) => {
     });
     if (!ifExist) {
       const dbRes = await Question.create(newQuestion);
-      return res.status(201).json({ message: "success", questionId: dbRes.dataValues.id });
+      return res
+        .status(201)
+        .json({ message: "success", questionId: dbRes.dataValues.id });
     } else {
       return res.status(200).json({ message: "Question already exist" });
     }
@@ -110,8 +112,8 @@ module.exports.savedQuestion_get = async (req, res) => {
       where: { id: idArr[randomIndex] },
     });
     const questionObj = questionObjFunction(question.dataValues);
-    res.status(200).json(questionObj);
+    return res.status(200).json(questionObj);
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    return res.status(500).json({ message: error.message });
   }
 };

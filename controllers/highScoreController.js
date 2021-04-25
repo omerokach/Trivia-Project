@@ -9,9 +9,9 @@ module.exports.highScores_get = async (req, res) => {
         score: user.score,
       };
     });
-    res.status(200).json(highScoreTable);
+    return res.status(200).json(highScoreTable);
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    return res.status(500).json({ message: error.message });
   }
 };
 
@@ -28,8 +28,8 @@ module.exports.highScores_post = async (req, res) => {
         userIndex = i + 1;
       }
     });
-    res.status(200).json({ userIndex, userId: newUser.dataValues.id });
+    return res.status(200).json({ userIndex, userId: newUser.dataValues.id });
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    return res.status(500).json({ message: error.message });
   }
 };
