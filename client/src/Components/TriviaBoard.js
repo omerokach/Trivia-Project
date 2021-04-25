@@ -64,7 +64,7 @@ export default function TriviaBoard({
             score: playerScore,
           });
           setPlayerRank(res.data.userIndex);
-          const ratingRes = await axios.post("/rating", {
+          await axios.post("/rating", {
             userId: res.data.userId,
             ratingArr,
             userScore: playerScore,
