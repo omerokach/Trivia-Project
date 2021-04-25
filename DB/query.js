@@ -228,7 +228,6 @@ function questionGeneratorTypeTwoFunc() {
     typeTwoQuestionObj.rating = 0;
     typeTwoQuestionObj.numOfVotes = 0;
 
-    console.log(typeTwoQuestionObj);
     return typeTwoQuestionObj;
   });
 }
