@@ -20,7 +20,7 @@ export default function TriviaBoard({ firstQuestion, setStart, userName }) {
   const [timer, setTimer] = useState(updateTimer);
   const [questionAsked, setQuestionAsked] = useState(1);
   const [playerScore, setPlayerScore] = useState(0);
-  const ratingArr = [];
+  const [ratingArr, setRatingArr] = useState([]);
 
   const getSavedQuestion = async () => {
     try {
@@ -77,6 +77,12 @@ export default function TriviaBoard({ firstQuestion, setStart, userName }) {
             score: playerScore,
           });
           setPlayerRank(res.data.userIndex);
+          const ratingRes = await axios.post("/rating", {
+            userId: res.data.userId,
+            ratingArr,
+            userScore: playerScore,
+          });
+          console.log(ratingRes);
         } catch (error) {
           console.log(error);
         }
@@ -84,9 +90,9 @@ export default function TriviaBoard({ firstQuestion, setStart, userName }) {
     }
   };
 
-  const userRatingSave = (rating, question) => {
-    
-    ratingArr.push({ rating, question });
+  const userRatingSave = (rating, questionId) => {
+    setRatingArr((prev) => [...prev, { rating, questionId }]);
+    console.log(ratingArr);
   };
 
   return (

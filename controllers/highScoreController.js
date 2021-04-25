@@ -18,7 +18,7 @@ module.exports.highScores_get = async (req, res) => {
 module.exports.highScores_post = async (req, res) => {
   const userScore = req.body;
   try {
-    await HighScores.create(userScore);
+    const newUser = await HighScores.create(userScore);
     const dbRes = await HighScores.findAll({});
     const arr = dbRes.map((obj) => obj.toJSON());
     arr.sort((a, b) => b.score - a.score);
@@ -28,7 +28,7 @@ module.exports.highScores_post = async (req, res) => {
         userIndex = i + 1;
       }
     });
-    res.status(200).json({ userIndex });
+    res.status(200).json({ userIndex, userId: newUser.dataValues.id });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

@@ -22,10 +22,10 @@ function AfterAnswer({
 }) {
   console.log(currentQuestion);
   const [isRated, setIsRated] = useState(false);
+
   const continueButton = async () => {
     if (wrongAnswers === 3) {
       setStart(false);
-      console.log("loose");
       return;
     }
 
@@ -42,13 +42,23 @@ function AfterAnswer({
     }
   };
 
-  const ratingOnce = (questionRating, question) => {
+  const ratingOnce = async (questionRating, questionId) => {
     setIsRated(true);
-    currentQuestion.numOfVotes += 1;
     if (!currentQuestion.id) {
-      const dbRes = axios.post("/trivia/save_new_question", currentQuestion);
+      currentQuestion.numOfVotes += 1;
+      currentQuestion.rating = questionRating;
+      try {
+        const dbRes = await axios.post(
+          "/trivia/save_new_question",
+          currentQuestion
+        );
+        console.log(dbRes.message);
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
+      userRatingSave(questionRating, questionId);
     }
-    userRatingSave(questionRating, question);
   };
 
   return (
@@ -100,7 +110,7 @@ function AfterAnswer({
           onClick={
             isRated === false
               ? (e) => {
-                  ratingOnce(e.target.id, currentQuestion.question);
+                  ratingOnce(e.target.id, currentQuestion.id);
                 }
               : null
           }
@@ -112,7 +122,7 @@ function AfterAnswer({
           onClick={
             isRated === false
               ? (e) => {
-                  ratingOnce(e.target.id, currentQuestion.question);
+                  ratingOnce(e.target.id, currentQuestion.id);
                 }
               : null
           }
@@ -124,7 +134,7 @@ function AfterAnswer({
           onClick={
             isRated === false
               ? (e) => {
-                  ratingOnce(e.target.id, currentQuestion.question);
+                  ratingOnce(e.target.id, currentQuestion.id);
                 }
               : null
           }
@@ -136,7 +146,7 @@ function AfterAnswer({
           onClick={
             isRated === false
               ? (e) => {
-                  ratingOnce(e.target.id, currentQuestion.question);
+                  ratingOnce(e.target.id, currentQuestion.id);
                 }
               : null
           }
@@ -148,7 +158,7 @@ function AfterAnswer({
           onClick={
             isRated === false
               ? (e) => {
-                  ratingOnce(e.target.id, currentQuestion.question);
+                  ratingOnce(e.target.id, currentQuestion.id);
                 }
               : null
           }

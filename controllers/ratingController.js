@@ -43,7 +43,7 @@ module.exports.ratings_post = async (req, res) => {
   } catch (error) {
     console.log(error);
   }
-  data.ratingArr.map((obj) => {
-    calculateQuestionRating(obj.questionId);
+  data.ratingArr.map(async (obj) => {
+    await calculateQuestionRating(obj.questionId);
   });
 };
