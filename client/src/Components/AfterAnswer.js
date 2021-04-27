@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "../App.css";
 import axios from "axios";
 import Swal from "sweetalert2";
+import { useHistory } from "react-router";
 
 function AfterAnswer({
   setDisplayState,
@@ -24,6 +25,7 @@ function AfterAnswer({
   setCurrentQuestion,
 }) {
   const [isRated, setIsRated] = useState(false);
+  const history = useHistory();
 
   const getGeneratedQuestion = async () => {
     try {
@@ -31,7 +33,22 @@ function AfterAnswer({
       setQuestionAsked((prev) => prev + 1);
       setCurrentQuestion(res.data);
     } catch (error) {
-      console.log(error);
+      if (
+        error.response.data === "Unauthorized user" ||
+        error.response.data === "Access Token Required"
+      ) {
+        Swal.fire({
+          title: "Error!",
+          text:
+            "Unauthorized user, you will be directed to the login page in a second",
+          icon: "error",
+          confirmButtonText: "Cool",
+        });
+        setTimeout(() => {
+          history.push("/");
+        }, 3000);
+        return;
+      }
       Swal.fire({
         title: "Error!",
         text: "Our server's are down for the moment, Hang tight!",
@@ -55,7 +72,22 @@ function AfterAnswer({
       setCurrentQuestion(res.data);
       setQuestionShowedId((prev) => [...prev, res.data.id]);
     } catch (error) {
-      console.log(error);
+      if (
+        error.response.data === "Unauthorized user" ||
+        error.response.data === "Access Token Required"
+      ) {
+        Swal.fire({
+          title: "Error!",
+          text:
+            "Unauthorized user, you will be directed to the login page in a second",
+          icon: "error",
+          confirmButtonText: "Cool",
+        });
+        setTimeout(() => {
+          history.push("/");
+        }, 3000);
+        return;
+      }
       Swal.fire({
         title: "Error!",
         text: "Our server's are down for the moment, Hang tight!",
@@ -115,6 +147,22 @@ function AfterAnswer({
         setTimer(updateTimer());
       }
     } catch (error) {
+      if (
+        error.response.data === "Unauthorized user" ||
+        error.response.data === "Access Token Required"
+      ) {
+        Swal.fire({
+          title: "Error!",
+          text:
+            "Unauthorized user, you will be directed to the login page in a second",
+          icon: "error",
+          confirmButtonText: "Cool",
+        });
+        setTimeout(() => {
+          history.push("/");
+        }, 3000);
+        return;
+      }
       Swal.fire({
         title: "Error!",
         text: "Our server's are down for the moment, Hang tight!",
@@ -137,7 +185,22 @@ function AfterAnswer({
         setQuestionShowedId((prev) => [...prev, dbRes.questionId]);
         setIsRated(true);
       } catch (error) {
-        console.log(error);
+        if (
+          error.response.data === "Unauthorized user" ||
+          error.response.data === "Access Token Required"
+        ) {
+          Swal.fire({
+            title: "Error!",
+            text:
+              "Unauthorized user, you will be directed to the login page in a second",
+            icon: "error",
+            confirmButtonText: "Cool",
+          });
+          setTimeout(() => {
+            history.push("/");
+          }, 3000);
+          return;
+        }
       }
     } else {
       userRatingSave(questionRating, questionId);

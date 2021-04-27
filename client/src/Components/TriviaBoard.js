@@ -4,6 +4,7 @@ import Question from "./Question";
 import axios from "axios";
 import "../App.css";
 import Swal from "sweetalert2";
+import { useHistory } from "react-router";
 
 export default function TriviaBoard({
   firstQuestion,
@@ -28,6 +29,7 @@ export default function TriviaBoard({
   const [questionAsked, setQuestionAsked] = useState(1);
   const [playerScore, setPlayerScore] = useState(0);
   const [ratingArr, setRatingArr] = useState([]);
+  const history = useHistory();
 
   useEffect(() => {
     const count =
@@ -70,6 +72,22 @@ export default function TriviaBoard({
             userScore: playerScore,
           });
         } catch (error) {
+          if (
+            error.response.data === "Unauthorized user" ||
+            error.response.data === "Access Token Required"
+          ) {
+            Swal.fire({
+              title: "Error!",
+              text:
+                "Unauthorized user, you will be directed to the login page in a second",
+              icon: "error",
+              confirmButtonText: "Cool",
+            });
+            setTimeout(() => {
+              history.push("/");
+            }, 3000);
+            return;
+          }
           Swal.fire({
             title: "Error!",
             text: "Our server's are down for the moment, Hang tight!",

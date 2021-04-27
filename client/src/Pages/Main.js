@@ -3,6 +3,7 @@ import axios from "axios";
 import "../App.css";
 import TriviaBoard from "../Components/TriviaBoard";
 import Swal from "sweetalert2";
+import { useHistory } from "react-router";
 
 export default function Main({ userName }) {
   const [start, setStart] = useState(false);
@@ -10,6 +11,7 @@ export default function Main({ userName }) {
   const [clickedHighScore, setClickedHighScore] = useState(false);
   const [highScore, setHighScore] = useState([]);
   const [questionShowedId, setQuestionShowedId] = useState([]);
+  const history = useHistory();
 
   const startButton = async () => {
     try {
@@ -17,7 +19,22 @@ export default function Main({ userName }) {
       setQuestionShowedId((prev) => [...prev, res.data.id]);
       setFirstQuestion(res.data);
     } catch (error) {
-      console.log(error);
+      if (
+        error.response.data === "Unauthorized user" ||
+        error.response.data === "Access Token Required"
+      ) {
+        Swal.fire({
+          title: "Error!",
+          text:
+            "Unauthorized user, you will be directed to the login page in a second",
+          icon: "error",
+          confirmButtonText: "Cool",
+        });
+        setTimeout(() => {
+          history.push("/");
+        }, 3000);
+        return;
+      }
       Swal.fire({
         title: "Error!",
         text: "Our server's are down for the moment, Hang tight!",
@@ -36,6 +53,22 @@ export default function Main({ userName }) {
       const sorted = res.data.sort((a, b) => b.score - a.score);
       setHighScore(sorted);
     } catch (error) {
+      if (
+        error.response.data === "Unauthorized user" ||
+        error.response.data === "Access Token Required"
+      ) {
+        Swal.fire({
+          title: "Error!",
+          text:
+            "Unauthorized user, you will be directed to the login page in a second",
+          icon: "error",
+          confirmButtonText: "Cool",
+        });
+        setTimeout(() => {
+          history.push("/");
+        }, 3000);
+        return;
+      }
       Swal.fire({
         title: "Error!",
         text: "Our server's are down for the moment, Hang tight!",
@@ -58,7 +91,7 @@ export default function Main({ userName }) {
         />
       ) : (
         <div className="start-page">
-          <h1>Welcome {userName}</h1>
+          <h1>Welcome {history.location.state.user}</h1>
           <h2>Hope you'll enjoy 😃</h2>
           <div className="instruction">
             <h3>Instruction</h3>
