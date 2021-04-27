@@ -1,6 +1,6 @@
 import "./App.css";
 import Login from "./Pages/Login";
-import SignIn from "./Pages/SignIn";
+import SignUp from "./Pages/SignUp";
 import NotFound from "./Pages/NotFound";
 import {
   BrowserRouter as Router,
@@ -23,14 +23,15 @@ function App() {
         <Router>
           <Switch>
             <Route exact path="/">
-              <Login userName={userName} setUserName={setUserName} />
+              <Login setUserName={setUserName} />
             </Route>
-            <Route exact path="/signin" component={SignIn} />
+            <Route exact path="/signup">
+              <SignUp setUserName={setUserName} />
+            </Route>
             <Route exact path="/main">
               <Main userName={userName} />
             </Route>
             <Route path="/404" component={NotFound} />
-
             <Route>
               <Redirect to="/404"></Redirect>
             </Route>
