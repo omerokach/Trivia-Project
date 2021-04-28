@@ -18,13 +18,15 @@ const createToken = (user) => {
 module.exports.signUp_post = async (req, res) => {
   const { username, email, password } = req.body;
   try {
-    const isUsernameExist = await User.findOne({ where: { userName: username } });
+    const isUsernameExist = await User.findOne({
+      where: { userName: username },
+    });
     const isEmailExist = await User.findOne({ where: { email: email } });
 
     if (isUsernameExist) {
       return res.status(409).send("Username already exist");
     }
-    if (isEmailExist) { 
+    if (isEmailExist) {
       return res.status(409).send("Email already exist");
     }
 
@@ -69,5 +71,7 @@ module.exports.login_post = async (req, res) => {
     const token = createToken(userToken);
     res.cookie("jwt", token, { httpOnly: true, maxAge: maxAge * 1000 });
     return res.status(201).json({ user: userToken.username });
-  } catch (error) {}
+  } catch (error) {
+    res.status(500).send(error);
+  }
 };
