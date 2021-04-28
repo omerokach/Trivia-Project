@@ -20,8 +20,8 @@ export default function Main({ userName }) {
       setFirstQuestion(res.data);
     } catch (error) {
       if (
-        error.response.data == "Access Token Required" ||
-        error.response.data == "Unauthorized user"
+        error.response.data === "Access Token Required" ||
+        error.response.data === "Unauthorized user"
       ) {
         Swal.fire({
           title: "Error!",
@@ -57,8 +57,8 @@ export default function Main({ userName }) {
     } catch (error) {
       setClickedHighScore(false);
       if (
-        error.response.data == "Access Token Required" ||
-        error.response.data == "Unauthorized user"
+        error.response.data === "Access Token Required" ||
+        error.response.data === "Unauthorized user"
       ) {
         Swal.fire({
           title: "Error!",

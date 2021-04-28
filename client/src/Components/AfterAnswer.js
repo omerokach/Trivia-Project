@@ -33,8 +33,8 @@ function AfterAnswer({
       setCurrentQuestion(res.data);
     } catch (error) {
       if (
-        error.response.data == "Access Token Required" ||
-        error.response.data == "Unauthorized user"
+        error.response.data === "Access Token Required" ||
+        error.response.data === "Unauthorized user"
       ){
         Swal.fire({
           title: "Error!",
@@ -71,8 +71,8 @@ function AfterAnswer({
       setQuestionShowedId((prev) => [...prev, res.data.id]);
     } catch (error) {
       if (
-        error.response.data == "Access Token Required" ||
-        error.response.data == "Unauthorized user"
+        error.response.data === "Access Token Required" ||
+        error.response.data === "Unauthorized user"
       ){
         Swal.fire({
           title: "Error!",
@@ -145,8 +145,8 @@ function AfterAnswer({
       }
     } catch (error) {
       if (
-        error.response.data == "Access Token Required" ||
-        error.response.data == "Unauthorized user"
+        error.response.data === "Access Token Required" ||
+        error.response.data === "Unauthorized user"
       ){
         Swal.fire({
           title: "Error!",
@@ -182,8 +182,8 @@ function AfterAnswer({
         setIsRated(true);
       } catch (error) {
         if (
-          error.response.data == "Access Token Required" ||
-          error.response.data == "Unauthorized user"
+          error.response.data === "Access Token Required" ||
+          error.response.data === "Unauthorized user"
         ){
           Swal.fire({
             title: "Error!",
@@ -312,7 +312,7 @@ function AfterAnswer({
           5⭐{" "}
         </span>
       </div>
-      <button onClick={() => continueButton()}>
+      <button className="gameove-button" onClick={() => continueButton()}>
         {wrongAnswers === 3 ? "Back to homepage" : "Continue ↪"}
       </button>
     </div>

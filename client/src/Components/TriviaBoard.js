@@ -72,8 +72,8 @@ export default function TriviaBoard({
           });
         } catch (error) {
           if (
-            error.response.data == "Access Token Required" ||
-            error.response.data == "Unauthorized user"
+            error.response.data === "Access Token Required" ||
+            error.response.data === "Unauthorized user"
           ) {
             Swal.fire({
               title: "Error!",
