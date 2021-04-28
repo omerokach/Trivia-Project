@@ -20,12 +20,12 @@ module.exports.highScores_post = async (req, res) => {
   let responseUser = "";
   try {
     const ifExistUser = await HighScores.findOne({
-      where: { userName: userScore.username },
+      where: { userName: userScore.userName },
     });
     if (ifExistUser) {
-      if(ifExistUser.dataValues.score < userScore.score){
+      if (ifExistUser.dataValues.score < userScore.score) {
         await HighScores.update(
-          { score: ifExistUser.dataValues.score },
+          { score: userScore.score },
           { where: { userName: userScore.userName } }
         );
       }

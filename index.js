@@ -13,7 +13,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.use("/trivia", checkUser, triviaRoute);
-app.use("/high_score", highScoreRoute);
+app.use("/high_score", checkUser, highScoreRoute);
 app.use("/rating", checkUser, ratingRoute);
 app.use("/users", usersRoute);
 
