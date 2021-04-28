@@ -18,7 +18,7 @@ export default function Login({setUserName}) {
         setUserName(res.data.user);
         history.push({
           pathname: "/main",
-          state: res.data.user,
+          state: {user: res.data.user},
         });
       }
     } catch (error) {
@@ -33,11 +33,15 @@ export default function Login({setUserName}) {
       <h1>Welcome to the most popular trivia game online</h1>
       <div className="login-div">
         <h2>Login</h2>
-        <form onSubmit={handleSubmit(loginButton)}>
+        <form className="login-form" onSubmit={handleSubmit(loginButton)}>
+          <div  className="label-input">
           <label htmlFor="email">Email: </label>
           <input type="email" name="email" {...register("email")} required />
-          <label htmlFor="password">Password: </label>
+          </div>
+          <div  className="label-input">
+          <labe  htmlFor="password">Password: </labe>
           <input type="password" name="password" {...register("password")} required/>
+          </div>
           <button>login</button>
           <div className="error-div">
             {error !== '' ? error : ""}

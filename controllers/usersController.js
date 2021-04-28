@@ -57,20 +57,17 @@ module.exports.login_post = async (req, res) => {
     if (!existUser) {
       return res.status(404).send("Incorrect email or password");
     }
-    const auth = compareSync(
-      existUser.dataValues.password,
-      process.env.SECRET_KEY
-    );
+    const auth = compareSync(password, existUser.dataValues.password);
     if (!auth) {
       return res.status(404).send("Incorrect email or password");
     }
     const userToken = {
-      username: existUser.dataValues.username,
+      username: existUser.dataValues.userName,
       email: existUser.dataValues.email,
     };
     const token = createToken(userToken);
     res.cookie("jwt", token, { httpOnly: true, maxAge: maxAge * 1000 });
-    return res.status(201).json({ user: userToken.username });
+    return res.status(200).json({ user: userToken.username });
   } catch (error) {
     res.status(500).send(error);
   }

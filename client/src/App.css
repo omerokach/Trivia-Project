@@ -37,7 +37,22 @@ body {
   box-shadow: 5px 5px 20px #6f726b;
 }
 
+/* signup page */
+
+.signup-form {
+  align-items: center;
+  justify-content: center;
+}
+
+.signup-form div {
+  margin: 1rem 1rem;
+}
+
 /* login page */
+
+.login-form div {
+  margin: 1rem 1rem;
+}
 
 .login-page h1 {
   font-size: 2.5rem;
@@ -270,7 +285,8 @@ td {
 }
 
 .footer {
-  position: absolute;
+  position: fixed;
+  bottom: 0;
   bottom: 0;
   height: 4rem;
   width: 100%;
@@ -278,6 +294,7 @@ td {
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: -1;
 }
 
 /* 404 page */

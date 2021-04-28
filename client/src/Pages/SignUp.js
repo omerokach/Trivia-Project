@@ -38,19 +38,22 @@ export default function SignUp({setUserName}) {
   return (
     <div>
       <h1>Sign Up</h1>
-      <form onSubmit={handleSubmit(submitForm)}>
+      <form className="signup-form" onSubmit={handleSubmit(submitForm)}>
+        <div className="signup-label-input">
         <label htmlFor="username">Username:</label>
         <input type="text" name="username" {...register("username")} required />
         <div className="sign-up-error">
           {userNameError !== "" ? userNameError : ""}
         </div>
-
+        </div>
+        <div className="signup-label-input">
         <label htmlFor="email">Email:</label>
         <input type="email" name="email" {...register("email")} required />
         <div className="sign-up-error">
           {emailError !== "" ? emailError : ""}
         </div>
-
+        </div>
+          <div className="signup-label-input">
         <label htmlFor="password">Password:</label>
         <input
           type="password"
@@ -58,6 +61,7 @@ export default function SignUp({setUserName}) {
           {...register("password")}
           required
         />
+          </div>
         <div className="sign-up-error"></div>
         <button>Sign Up</button>
         <p>

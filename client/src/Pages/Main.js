@@ -22,18 +22,19 @@ export default function Main({ userName }) {
       if (
         error.response.data == "Access Token Required" ||
         error.response.data == "Unauthorized user"
-      ){
+      ) {
         Swal.fire({
           title: "Error!",
-          text: "Unauthorized user, you will be ridirected to login page in a second",
+          text:
+            "Unauthorized user, you will be ridirected to login page in a second",
           icon: "error",
           confirmButtonText: "Cool",
         });
         setTimeout(() => {
-          history.push("/")
+          history.push("/");
         }, 3000);
         return;
-      };
+      }
       Swal.fire({
         title: "Error!",
         text: "Our server's are down for the moment, Hang tight!",
@@ -47,26 +48,30 @@ export default function Main({ userName }) {
 
   const highScoreButton = async () => {
     try {
+      clickedHighScore === true
+        ? setClickedHighScore(false)
+        : setClickedHighScore(true);
       const res = await axios.get("/high_score");
-      setClickedHighScore(true);
       const sorted = res.data.sort((a, b) => b.score - a.score);
       setHighScore(sorted);
     } catch (error) {
+      setClickedHighScore(false);
       if (
         error.response.data == "Access Token Required" ||
         error.response.data == "Unauthorized user"
-      ){
+      ) {
         Swal.fire({
           title: "Error!",
-          text: "Unauthorized user, you will be ridirected to login page in a second",
+          text:
+            "Unauthorized user, you will be ridirected to login page in a second",
           icon: "error",
           confirmButtonText: "Cool",
         });
         setTimeout(() => {
-          history.push("/")
+          history.push("/");
         }, 3000);
         return;
-      };
+      }
       Swal.fire({
         title: "Error!",
         text: "Our server's are down for the moment, Hang tight!",
