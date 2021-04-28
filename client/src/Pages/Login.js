@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import "../App.css";
 import axios from "axios";
 
-export default function Login({setUserName}) {
+export default function Login({setUserName, setIsLogIn}) {
   const [error, setError] = useState('');
   const { register, handleSubmit } = useForm();
   const history = useHistory();
@@ -16,6 +16,7 @@ export default function Login({setUserName}) {
       const res = await axios.post("/users/login", {email, password});
       if(res.status === 200){
         setUserName(res.data.user);
+        setIsLogIn(true);
         history.push({
           pathname: "/main",
           state: {user: res.data.user},

@@ -35,18 +35,19 @@ function AfterAnswer({
       if (
         error.response.data === "Access Token Required" ||
         error.response.data === "Unauthorized user"
-      ){
+      ) {
         Swal.fire({
           title: "Error!",
-          text: "Unauthorized user, you will be ridirected to login page in a second",
+          text:
+            "Unauthorized user, you will be ridirected to login page in a second",
           icon: "error",
           confirmButtonText: "Cool",
         });
         setTimeout(() => {
-          history.push("/")
+          history.push("/");
         }, 3000);
         return;
-      };
+      }
       Swal.fire({
         title: "Error!",
         text: "Our server's are down for the moment, Hang tight!",
@@ -73,18 +74,19 @@ function AfterAnswer({
       if (
         error.response.data === "Access Token Required" ||
         error.response.data === "Unauthorized user"
-      ){
+      ) {
         Swal.fire({
           title: "Error!",
-          text: "Unauthorized user, you will be ridirected to login page in a second",
+          text:
+            "Unauthorized user, you will be ridirected to login page in a second",
           icon: "error",
           confirmButtonText: "Cool",
         });
         setTimeout(() => {
-          history.push("/")
+          history.push("/");
         }, 3000);
         return;
-      };
+      }
       Swal.fire({
         title: "Error!",
         text: "Our server's are down for the moment, Hang tight!",
@@ -147,18 +149,19 @@ function AfterAnswer({
       if (
         error.response.data === "Access Token Required" ||
         error.response.data === "Unauthorized user"
-      ){
+      ) {
         Swal.fire({
           title: "Error!",
-          text: "Unauthorized user, you will be ridirected to login page in a second",
+          text:
+            "Unauthorized user, you will be ridirected to login page in a second",
           icon: "error",
           confirmButtonText: "Cool",
         });
         setTimeout(() => {
-          history.push("/")
+          history.push("/");
         }, 3000);
         return;
-      };
+      }
       Swal.fire({
         title: "Error!",
         text: "Our server's are down for the moment, Hang tight!",
@@ -184,18 +187,19 @@ function AfterAnswer({
         if (
           error.response.data === "Access Token Required" ||
           error.response.data === "Unauthorized user"
-        ){
+        ) {
           Swal.fire({
             title: "Error!",
-            text: "Unauthorized user, you will be ridirected to login page in a second",
+            text:
+              "Unauthorized user, you will be ridirected to login page in a second",
             icon: "error",
             confirmButtonText: "Cool",
           });
           setTimeout(() => {
-            history.push("/")
+            history.push("/");
           }, 3000);
           return;
-        };
+        }
       }
     } else {
       userRatingSave(questionRating, questionId);

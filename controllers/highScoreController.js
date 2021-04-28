@@ -17,8 +17,22 @@ module.exports.highScores_get = async (req, res) => {
 
 module.exports.highScores_post = async (req, res) => {
   const userScore = req.body;
+  let responseUser = "";
   try {
-    const newUser = await HighScores.create(userScore);
+    const ifExistUser = await HighScores.findOne({
+      where: { userName: userScore.username },
+    });
+    if (ifExistUser) {
+      if(ifExistUser.dataValues.score < userScore.score){
+        await HighScores.update(
+          { score: ifExistUser.dataValues.score },
+          { where: { userName: userScore.userName } }
+        );
+      }
+      responseUser = ifExistUser;
+    } else {
+      responseUser = await HighScores.create(userScore);
+    }
     const dbRes = await HighScores.findAll({});
     const arr = dbRes.map((obj) => obj.toJSON());
     arr.sort((a, b) => b.score - a.score);
@@ -28,8 +42,12 @@ module.exports.highScores_post = async (req, res) => {
         userIndex = i + 1;
       }
     });
-    return res.status(200).json({ userIndex, userId: newUser.dataValues.id });
+    console.log(responseUser);
+    return res
+      .status(200)
+      .json({ userIndex, userId: responseUser.dataValues.id });
   } catch (error) {
+    console.log(error.message);
     return res.status(500).json({ message: error.message });
   }
 };

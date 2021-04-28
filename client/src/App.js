@@ -10,23 +10,23 @@ import {
 } from "react-router-dom";
 import Main from "./Pages/Main";
 import { useState } from "react";
+import Header from "./Components/Header";
 
 function App() {
   const [userName, setUserName] = useState("");
+  const [isLogIn, setIsLogIn] = useState(false);
 
   return (
     <>
-      <div className="header">
-        <h1>Cross Countries Trivia</h1>
-      </div>
+        <Header isLogIn={isLogIn} setIsLogIn={setIsLogIn} />
       <div className="App">
         <Router>
           <Switch>
             <Route exact path="/">
-              <Login setUserName={setUserName} />
+              <Login setUserName={setUserName} setIsLogIn={setIsLogIn} />
             </Route>
             <Route exact path="/signup">
-              <SignUp setUserName={setUserName} />
+              <SignUp setUserName={setUserName} setIsLogIn={setIsLogIn} />
             </Route>
             <Route exact path="/main">
               <Main userName={userName} />

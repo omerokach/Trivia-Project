@@ -345,9 +345,7 @@ async function questionGenerator() {
 }
 
 // (async function a() {
-//   for (let i = 0; i < 20; i++) {
 //     Question.create(await questionGenerator());
-//   }
 // })();
 
 module.exports = { questionGenerator };

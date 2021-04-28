@@ -5,7 +5,7 @@ import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
 import "../App.css";
 
-export default function SignUp({setUserName}) {
+export default function SignUp({setUserName, setIsLogIn}) {
   const [userNameError, setUserNameError] = useState("");
   const [emailError, setEmailError] = useState("");
 
@@ -21,6 +21,7 @@ export default function SignUp({setUserName}) {
 
       if (res.status === 201) {
         setUserName(res.data.user);
+        setIsLogIn(true)
         history.push({
           pathname: "/main",
           state: { user: res.data.user },

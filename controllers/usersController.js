@@ -4,6 +4,7 @@ const { User } = require("../DB/models");
 const bcrypt = require("bcrypt");
 const { hashSync, genSaltSync, compareSync } = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const { response } = require("express");
 // const crypto = require("crypto");
 // console.log(crypto.randomBytes(32).toString("hex"));
 
@@ -71,4 +72,9 @@ module.exports.login_post = async (req, res) => {
   } catch (error) {
     res.status(500).send(error);
   }
+};
+
+module.exports.logout_get = (req, res) => {
+  res.cookie("jwt", "logged out", { maxAge: 1 });
+  res.status(200).send("user logged out");
 };
