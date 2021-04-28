@@ -1,7 +1,9 @@
 import React from "react";
 import axios from "axios";
+import { useHistory } from "react-router";
 
 function Header({ isLogIn, setIsLogIn }) {
+  const history = useHistory();
   const logOutButton = async () => {
     try {
       await axios.get("/users/logout");

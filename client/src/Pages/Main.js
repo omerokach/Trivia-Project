@@ -12,7 +12,7 @@ export default function Main({ userName }) {
   const [highScore, setHighScore] = useState([]);
   const [questionShowedId, setQuestionShowedId] = useState([]);
   const history = useHistory();
-
+  
   const startButton = async () => {
     try {
       const res = await axios.get("/trivia/saved_question");
