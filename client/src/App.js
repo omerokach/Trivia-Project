@@ -2,31 +2,31 @@ import "./App.css";
 import Login from "./Pages/Login";
 import SignUp from "./Pages/SignUp";
 import NotFound from "./Pages/NotFound";
+import Header from "./Components/Header";
+import Main from "./Pages/Main";
 import {
   BrowserRouter as Router,
   Route,
   Switch,
   Redirect,
 } from "react-router-dom";
-import Main from "./Pages/Main";
 import { useState } from "react";
 
 function App() {
   const [userName, setUserName] = useState("");
+  const [isLogin, setIsLogin] = useState(false);
 
   return (
     <>
-      <div className="header">
-        <h1>Cross Countries Trivia</h1>
-      </div>
+      <Header isLogin={isLogin} setIsLogin={setIsLogin} />
       <div className="App">
         <Router>
           <Switch>
             <Route exact path="/">
-              <Login setUserName={setUserName} />
+              <Login setUserName={setUserName} setIsLogin={setIsLogin} />
             </Route>
             <Route exact path="/signup">
-              <SignUp setUserName={setUserName} />
+              <SignUp setUserName={setUserName} setIsLogin={setIsLogin} />
             </Route>
             <Route exact path="/main">
               <Main userName={userName} />

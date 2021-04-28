@@ -5,7 +5,7 @@ import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
-export default function SignUp({ setUserName }) {
+export default function SignUp({ setUserName, setIsLogin }) {
   const [usernameError, setUsernameError] = useState("");
   const [emailError, setEmailError] = useState("");
   const { register, handleSubmit } = useForm();
@@ -23,6 +23,7 @@ export default function SignUp({ setUserName }) {
 
       if (res.status === 201) {
         setUserName(res.data.user);
+        setIsLogin(true);
         history.push({
           pathname: "/main",
           state: { user: res.data.user },

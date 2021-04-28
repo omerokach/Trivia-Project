@@ -65,3 +65,8 @@ module.exports.login_post = async (req, res) => {
     res.status(200).json({ user: userToken.userName });
   } catch (error) {}
 };
+
+module.exports.logout_get = (req, res) => {
+  res.cookie("jwt", "logged_out", { maxAge: 1 });
+  res.status(200).send("user logged out");
+};

@@ -18,11 +18,28 @@ body {
   background-color: #f38181;
   display: flex;
   align-items: center;
+  justify-content: space-between;
 }
 
 .header h1 {
   margin-left: 1rem;
   font-family: "Roboto", sans-serif, 500;
+}
+
+.header button {
+  font-size: 1rem;
+  margin-right: 8rem;
+  background-color: transparent;
+  padding: 0.5rem;
+  outline: none;
+  border: 1px solid black;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.header button:hover {
+  background-color: black;
+  color: white;
 }
 
 .App {
