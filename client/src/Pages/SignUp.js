@@ -22,6 +22,7 @@ export default function SignUp({setUserName, setIsLogIn}) {
       if (res.status === 201) {
         setUserName(res.data.user);
         setIsLogIn(true)
+        localStorage.setItem("isLogIn", true);
         history.push({
           pathname: "/main",
           state: { user: res.data.user },

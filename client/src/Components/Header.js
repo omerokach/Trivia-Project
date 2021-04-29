@@ -4,6 +4,8 @@ import { useHistory } from "react-router";
 
 function Header({ isLogIn, setIsLogIn }) {
   const history = useHistory();
+  let logedIn =localStorage.getItem("isLogIn");
+  logedIn === 'false' ? logedIn = false : logedIn = true;
   const logOutButton = async () => {
     try {
       await axios.get("/users/logout");
@@ -17,7 +19,7 @@ function Header({ isLogIn, setIsLogIn }) {
   return (
     <div className="header">
       <h1>Cross Countries Trivia</h1>
-      {isLogIn && <button onClick={logOutButton}>Logout</button>}
+      {logedIn && <button onClick={logOutButton}>Logout</button>}
     </div>
   );
 }

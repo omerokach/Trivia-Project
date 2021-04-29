@@ -9,16 +9,39 @@ import {
   Redirect,
 } from "react-router-dom";
 import Main from "./Pages/Main";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Header from "./Components/Header";
+import axios from "axios";
+
 
 function App() {
   const [userName, setUserName] = useState("");
   const [isLogIn, setIsLogIn] = useState(false);
+  localStorage.setItem("isLogIn", false);
+
+  useEffect(() => {
+    setIsLogIn(localStorage.getItem("isLogIn"));
+    isLogIn === false ? (setIsLogIn(false)) : (setIsLogIn(true));
+  }, []);
+
+  const logOutButton = async () => {
+    try {
+      await axios.get("/users/logout");
+      localStorage.setItem("isLogIn",false);
+      document.location.pathname = "/";
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
 
   return (
     <>
-        <Header isLogIn={isLogIn} setIsLogIn={setIsLogIn} />
+      <div className="header">
+        <h1>Cross Countries Trivia</h1>
+        {console.log("isLogIn inside header", isLogIn)}
+        {isLogIn && <button onClick={logOutButton}>Logout</button>}
+      </div>
+      {/* <Header isLogIn={isLogIn} setIsLogIn={setIsLogIn} /> */}
       <div className="App">
         <Router>
           <Switch>

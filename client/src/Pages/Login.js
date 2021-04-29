@@ -17,6 +17,7 @@ export default function Login({setUserName, setIsLogIn}) {
       if(res.status === 200){
         setUserName(res.data.user);
         setIsLogIn(true);
+        localStorage.setItem("isLogIn", true);
         history.push({
           pathname: "/main",
           state: {user: res.data.user},
