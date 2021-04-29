@@ -16,7 +16,6 @@ export default function Main({ userName }) {
   const startButton = async () => {
     try {
       const res = await axios.get("/trivia/saved_question");
-      console.log(res.data);
       setQuestionShowedId((prev) => [...prev, res.data.id]);
       setFirstQuestion(res.data);
     } catch (error) {

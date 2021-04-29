@@ -59,7 +59,6 @@ module.exports.generateQuestion_get = async (req, res) => {
 module.exports.saveNewQuestion_post = async (req, res) => {
   try {
     const newQuestion = req.body;
-    console.log(newQuestion);
     newQuestion.questionValues = JSON.stringify(newQuestion.questionValues);
     const ifExist = await Question.findOne({
       where: {

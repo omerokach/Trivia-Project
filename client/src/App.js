@@ -13,7 +13,6 @@ import { useState, useEffect } from "react";
 import Header from "./Components/Header";
 import axios from "axios";
 
-
 function App() {
   const [userName, setUserName] = useState("");
   const [isLogIn, setIsLogIn] = useState(false);
@@ -21,13 +20,13 @@ function App() {
 
   useEffect(() => {
     setIsLogIn(localStorage.getItem("isLogIn"));
-    isLogIn === false ? (setIsLogIn(false)) : (setIsLogIn(true));
+    isLogIn === false ? setIsLogIn(false) : setIsLogIn(true);
   }, []);
 
   const logOutButton = async () => {
     try {
       await axios.get("/users/logout");
-      localStorage.setItem("isLogIn",false);
+      localStorage.setItem("isLogIn", false);
       document.location.pathname = "/";
     } catch (error) {
       console.log(error.message);
@@ -38,7 +37,6 @@ function App() {
     <>
       <div className="header">
         <h1>Cross Countries Trivia</h1>
-        {console.log("isLogIn inside header", isLogIn)}
         {isLogIn && <button onClick={logOutButton}>Logout</button>}
       </div>
       {/* <Header isLogIn={isLogIn} setIsLogIn={setIsLogIn} /> */}
