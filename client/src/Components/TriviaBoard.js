@@ -35,7 +35,13 @@ export default function TriviaBoard({
     const count =
       timer > 0 &&
       displayState === 1 &&
-      setInterval(() => setTimer(timer - 1), 1000);
+      setInterval(
+        () =>
+          setTimer(() => {
+            return timer < 1 ? 0 : timer - 1;
+          }),
+        1000
+      );
     if (timer === 0) {
       setIsTimeOver(true);
       setDisplayState(2);
