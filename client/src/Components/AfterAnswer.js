@@ -23,6 +23,7 @@ function AfterAnswer({
   questionShowedId,
   setQuestionAsked,
   setCurrentQuestion,
+  setWaitForQuestion
 }) {
   const [isRated, setIsRated] = useState(false);
   const history = useHistory();
@@ -135,7 +136,7 @@ function AfterAnswer({
       } else {
         randomQuestion = "generated";
       }
-
+      setWaitForQuestion(true);
       if (randomQuestion === "generated") {
         setDisplayState(1);
         await getGeneratedQuestion();
@@ -145,6 +146,7 @@ function AfterAnswer({
         await getSavedQuestion();
         setTimer(updateTimer());
       }
+      setWaitForQuestion(false);
     } catch (error) {
       if (
         error.response.data === "Access Token Required" ||

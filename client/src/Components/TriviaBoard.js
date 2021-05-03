@@ -21,6 +21,7 @@ export default function TriviaBoard({
   const [displayState, setDisplayState] = useState(1);
   const [isTimeOver, setIsTimeOver] = useState(false);
   const [playerRank, setPlayerRank] = useState(null);
+  const [waitForQuestion, setWaitForQuestion] = useState(false);
   let timerCount = 20;
   const updateTimer = () => {
     return timerCount > 5 ? 20 - 0.5 * correctAnswers : 5;
@@ -106,18 +107,22 @@ export default function TriviaBoard({
   return (
     <div>
       {displayState === 1 ? (
-        <Question
-          currentQuestion={currentQuestion}
-          questionAsked={questionAsked}
-          checkAnswer={checkAnswer}
-          correctAnswers={correctAnswers}
-          wrongAnswers={wrongAnswers}
-          setTimer={setTimer}
-          timer={timer}
-          setTimeToAnswer={setTimeToAnswer}
-          displayState={displayState}
-          playerScore={playerScore}
-        />
+        waitForQuestion === false ? (
+          <Question
+            currentQuestion={currentQuestion}
+            questionAsked={questionAsked}
+            checkAnswer={checkAnswer}
+            correctAnswers={correctAnswers}
+            wrongAnswers={wrongAnswers}
+            setTimer={setTimer}
+            timer={timer}
+            setTimeToAnswer={setTimeToAnswer}
+            displayState={displayState}
+            playerScore={playerScore}
+          />
+        ) : (
+          <p id="load-question">🕗 🕔 Loading question.... 🕗 🕔 </p>
+        )
       ) : displayState === 2 ? (
         <AfterAnswer
           setDisplayState={setDisplayState}
@@ -138,6 +143,7 @@ export default function TriviaBoard({
           questionShowedId={questionShowedId}
           setQuestionAsked={setQuestionAsked}
           setCurrentQuestion={setCurrentQuestion}
+          setWaitForQuestion={setWaitForQuestion}
         />
       ) : (
         ""

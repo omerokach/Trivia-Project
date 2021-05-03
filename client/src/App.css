@@ -53,6 +53,13 @@ body {
   box-shadow: 5px 5px 20px #6f726b;
 }
 
+#load-question {
+  justify-content: center;
+  align-items: center;
+  margin-top: 10rem;
+  font-size: 20px;
+}
+
 /* signup page */
 
 .signup-form {
