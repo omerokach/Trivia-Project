@@ -44,25 +44,30 @@ export default function SignUp({ setUserName, setIsLogin }) {
     <div className="sign-up-div">
       <h1>Sign Up</h1>
       <form onSubmit={handleSubmit(submitForm)}>
-        <label htmlFor="username">Username:</label>
-        <input type="text" name="username" {...register("username")} required />
-        <div className="sign-up-error">
-          {usernameError !== "" ? usernameError : ""}
+        <div>
+          <label htmlFor="username">Username:</label>
+          <input
+            type="text"
+            name="username"
+            {...register("username")}
+            required
+          />
+          <div className="sign-up-error">
+            {usernameError !== "" ? usernameError : ""}
+          </div>
+          <label htmlFor="email">Email:</label>
+          <input type="email" name="email" {...register("email")} required />
+          <div className="sign-up-error">
+            {emailError !== "" ? emailError : ""}
+          </div>
+          <label htmlFor="password">Password:</label>
+          <input
+            type="password"
+            name="password"
+            {...register("password")}
+            required
+          />{" "}
         </div>
-
-        <label htmlFor="email">Email:</label>
-        <input type="email" name="email" {...register("email")} required />
-        <div className="sign-up-error">
-          {emailError !== "" ? emailError : ""}
-        </div>
-
-        <label htmlFor="password">Password:</label>
-        <input
-          type="password"
-          name="password"
-          {...register("password")}
-          required
-        />
         <button>Sign Up</button>
         <p>
           Already have a user? <Link to="/">Login here</Link>

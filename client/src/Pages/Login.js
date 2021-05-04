@@ -37,15 +37,18 @@ export default function Login({ setUserName, setIsLogin }) {
       <div className="login-div">
         <h2>Login</h2>
         <form onSubmit={handleSubmit(loginButton)}>
-          <label htmlFor="email">Email: </label>
-          <input type="email" name="email" {...register("email")} required />
-          <label htmlFor="password">Password: </label>
-          <input
-            type="password"
-            name="password"
-            {...register("password")}
-            required
-          />
+          <div>
+            <label htmlFor="email">Email: </label>
+            <input type="email" name="email" {...register("email")} required />
+            <br />
+            <label htmlFor="password">Password: </label>
+            <input
+              type="password"
+              name="password"
+              {...register("password")}
+              required
+            />
+          </div>
           <button>login</button>
           <div className="error-div">{error !== "" ? error : ""}</div>
           <p>
