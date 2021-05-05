@@ -63,7 +63,10 @@ module.exports.login_post = async (req, res) => {
     const token = createToken(userToken);
     res.cookie("jwt", token, { httpOnly: true, maxAge: maxAge * 1000 });
     res.status(200).json({ user: userToken.userName });
-  } catch (error) {}
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({message: error});
+  }
 };
 
 module.exports.logout_get = (req, res) => {

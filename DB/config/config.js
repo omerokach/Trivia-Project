@@ -2,31 +2,33 @@ require("dotenv").config();
 module.exports = {
   development: {
     username: "root",
-    password: "o1m2e3r4",
-    database: "trivia",
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_DATABASE,
     host: "34.122.130.179",
     port: "3306",
     dialect: "mysql",
     logging: false,
-    socketpath: "/cloudsql/firm-pentameter-312707:us-central1:countries-trivia",
   },
   test: {
     username: "root",
-    password: "o1m2e3r4",
-    database: "trivia",
-    host: "34.122.130.179",
-    dialect: "mysql",
-    logging: false,
-    socketpath: "/cloudsql/firm-pentameter-312707:us-central1:countries-trivia",
-  },
-  production: {
-    username: "root",
-    password: "o1m2e3r4",
-    database: "trivia",
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_DATABASE,
     host: "34.122.130.179",
     port: "3306",
     dialect: "mysql",
     logging: false,
-    socketpath: "/cloudsql/firm-pentameter-312707:us-central1:countries-trivia",
+    dialectOptions: {
+      socketPath: `/cloudsql/${process.env.INSTANCE_CONNECTION_NAME}`,
+    },
+  },
+  production: {
+    username: "root",
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_DATABASE,
+    dialect: "mysql",
+    logging: false,
+    dialectOptions: {
+      socketPath: `/cloudsql/${process.env.INSTANCE_CONNECTION_NAME}`,
+    },
   },
 };

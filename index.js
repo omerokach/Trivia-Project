@@ -8,6 +8,9 @@ const ratingRoute = require("./routes/rating");
 const usersRoute = require("./routes/users");
 const { checkUser } = require("./middlewares/authMiddleware");
 
+app.use(express.static("./client/build"));
+app.get("/", (req, res) => res.sendFile("index.html"));
+
 app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
