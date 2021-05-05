@@ -1,0 +1,16 @@
+runtime: nodejs
+env: flex
+manual_scaling:
+  instances: 1
+resources:
+  cpu: 1
+  memory_gb: 0.5
+  disk_size_gb: 10
+beta_settings:
+  cloud_sql_instances: firm-pentameter-312707:us-central1:countries-trivia
+env_variables:  
+  DB_DATABASE: trivia
+  DB_PASSWORD: o1m2e3r4
+  SECRET_KEY: fc04c7ed7bc711202dae37b4f8f9033c21076b2299fad89f1a02aa340899a844
+  INSTANCE_CONNECTION_NAME: firm-pentameter-312707:us-central1:countries-trivia
+  NODE_ENV: production
