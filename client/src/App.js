@@ -12,6 +12,7 @@ import Main from "./Pages/Main";
 import { useState, useEffect } from "react";
 import Header from "./Components/Header";
 import axios from "axios";
+import Background from "./Components/Background";
 
 function App() {
   const [userName, setUserName] = useState("");
@@ -39,7 +40,7 @@ function App() {
         <h1>Cross Countries Trivia</h1>
         {isLogIn && <button onClick={logOutButton}>Logout</button>}
       </div>
-      {/* <Header isLogIn={isLogIn} setIsLogIn={setIsLogIn} /> */}
+    <Background />
       <div className="App">
         <Router>
           <Switch>
