@@ -18,6 +18,9 @@ function App() {
 
   return (
     <>
+      <div class="bg"></div>
+      <div class="bg bg2"></div>
+      <div class="bg bg3"></div>
       <Header isLogin={isLogin} setIsLogin={setIsLogin} />
       <div className="App">
         <Router>
